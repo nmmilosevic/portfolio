@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { ArrowLeft, ArrowRight, ArrowUpRight, X, Copy, Check } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { getProjectBySlug, accentStyles, projects } from '@/data/projectsData'
-import type { ProjectData } from '@/data/projectsData'
+
 import { Navbar } from '@/components/Navbar'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 

@@ -1,9 +1,9 @@
 import './App.css'
 import { Link } from 'react-router-dom' // used by MotionLink (motion(Link))
 import { useState, useEffect, useMemo, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, type Variants } from 'framer-motion'
 import { ArrowUpRight, Copy, Check } from 'lucide-react'
-import { projects, accentStyles } from '@/data/projectsData'
+import { projects } from '@/data/projectsData'
 import { Navbar } from '@/components/Navbar'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 import type { ProjectData, ProjectAccent } from '@/data/projectsData'
@@ -13,7 +13,7 @@ import type { ProjectData, ProjectAccent } from '@/data/projectsData'
 const MotionLink = motion(Link)
 
 // blue-100 = #dbeafe, blue-300 = #93c5fd, brand blue = #1a10d6
-const cardVariants = {
+const cardVariants: Variants = {
   rest: {
     borderColor: '#f3f4f6',
     boxShadow: '0px 20px 60px rgba(30,64,175,0)',
@@ -28,12 +28,12 @@ const cardVariants = {
   },
 }
 
-const imageWrapperVariants = {
+const imageWrapperVariants: Variants = {
   rest: { transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] } },
   hover: { transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] } },
 }
 
-const arrowVariants = {
+const arrowVariants: Variants = {
   rest: { x: 0, y: 0, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } },
   hover: { x: 2, y: -2, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } },
 }
@@ -104,8 +104,6 @@ function ProjectRow({ project, index: rowIndex }: { project: ProjectData; index:
     const imgs = project.sections.flatMap(sec => sec.images ?? [])
     return imgs.length > 0 ? imgs : (project.coverImage ? [project.coverImage] : [])
   }, [project])
-
-  const accentHex = accentStyles[project.accent].accentHex
 
   return (
     // First card has no reveal class so it's always visible; rest animate on scroll
