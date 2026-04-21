@@ -113,7 +113,7 @@ export function Navbar() {
               rel="noopener noreferrer"
               className={`inline-flex items-center px-4 py-2 rounded-[6px] bg-[#1a10d6] text-white type-s font-semibold min-h-[36px] hover:bg-[#0e05f5] transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white whitespace-nowrap ${visible ? 'shadow-[0_2px_18px_rgba(26,16,214,0.38)]' : ''}`}
             >
-              Get in touch
+              Say hello
             </a>
 
             {/* Floating animated tag */}
