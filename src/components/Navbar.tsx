@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 // Stage definitions: [label, hold duration ms, golden bg?]
 const YOU_STAGES: [string, number, boolean][] = [
-  ['Your idea',   1800, false],
+  ['Your vision', 1800, false],
   ['My craft',    1800, false],
-  ["Let's build", 2400, true],
+  ['We ship.',    2400, true],
 ]
 
 // Float transition factory — organic multi-axis drift

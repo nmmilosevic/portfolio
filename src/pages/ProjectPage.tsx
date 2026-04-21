@@ -179,7 +179,7 @@ function FooterCTA() {
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.85, ease, delay: 0.08 }}
             >
-              Got something<br />
+              Have something<br />
               <span style={{ color: '#1a10d6' }}>worth building?</span>
             </motion.h2>
           </div>
@@ -193,7 +193,7 @@ function FooterCTA() {
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.75, ease, delay: 0.22 }}
           >
-            Available for freelance. If you have a product challenge worth solving, I&apos;d love to hear about it.
+            Open to new projects. If you have a product challenge worth solving, let&apos;s talk.
           </motion.p>
 
           {/* CTAs */}
@@ -291,7 +291,7 @@ function PageEnd({ currentSlug }: { currentSlug: string }) {
       <div className="bg-[#f3f4f6]">
         <div className="mx-auto max-w-5xl px-6 pt-[100px] pb-[100px]">
           <h1 className="font-heading type-h1-sm font-semibold text-[#0f172a] leading-[1.1] tracking-[-0.03em] mb-10">
-            More work
+            Other projects
           </h1>
 
           <motion.div
@@ -394,7 +394,7 @@ export default function ProjectPage() {
               className="inline-flex items-center gap-2 type-s text-[#64748b] hover:text-[#0f172a] transition-colors duration-200 mb-10 md:mb-12 group"
             >
               <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform duration-200" />
-              All projects
+              Back to work
             </Link>
           </motion.div>
 

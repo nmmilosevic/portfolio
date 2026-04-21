@@ -224,7 +224,7 @@ function Hero() {
           aria-hidden="true"
         />
         <span className="type-xs font-medium tracking-[0.06em] uppercase text-emerald-600 select-none">
-          Available for freelance
+          Open to new projects
         </span>
       </motion.div>
 
@@ -241,7 +241,7 @@ function Hero() {
           Senior Product&nbsp;Designer
         </motion.em>
         {' '}
-        <WordReveal text="crafting interfaces and systems for growing companies." delay={0.6} />
+        <WordReveal text="building interfaces and systems for ambitious products." delay={0.6} />
       </h1>
 
       {/* Subtitle */}
@@ -251,7 +251,7 @@ function Hero() {
         animate={{ opacity: 1, filter: 'blur(0px)', scale: 1 }}
         transition={{ duration: 0.8, ease, delay: 0.6 }}
       >
-        Based in Spain, working with global teams.
+        Based in Spain. Working with teams across the globe.
       </motion.p>
     </section>
   )
@@ -279,9 +279,9 @@ function Work() {
 
 function About() {
   const stats = [
-    { value: '2M+', label: 'Users impacted' },
+    { value: '2M+', label: 'Users reached' },
     { value: '5', label: 'Industries' },
-    { value: '50+', label: 'Features' },
+    { value: '50+', label: 'Features shipped' },
   ]
 
   return (
@@ -300,27 +300,27 @@ function About() {
             <p
               className="font-heading type-statement leading-[1.25] font-normal tracking-[-0.02em] text-[#0f172a]"
             >
-              Over{' '}
-              <span style={{ color: '#1a10d6', fontStyle: 'italic' }}>9 years</span>{' '}
-              working with fast-moving teams across Europe, from early-stage startups to large enterprises.
+              Nine{' '}
+              <span style={{ color: '#1a10d6', fontStyle: 'italic' }}>years</span>{' '}
+              designing with fast-moving teams across Europe, from early-stage startups to large companies.
             </p>
           </div>
 
           {/* Right — body + skills */}
           <div className="flex flex-col gap-[16px]">
             <p className="type-m text-[#64748b] leading-[1.65]">
-              I specialise in turning messy, complex problems into{' '}
+              I turn messy, complex problems into{' '}
               <span
                 className="font-medium"
                 style={{ color: '#0f172a' }}
               >
                 simple, intuitive
               </span>{' '}
-              product experiences. Whether it&apos;s a full platform redesign, a new feature, or a design system, I bring structure, clarity, and genuine craft to everything I touch.
+              product experiences. Full platform redesigns, new features, design systems, I bring structure, clarity, and real craft to everything I work on.
             </p>
 
             <p className="type-m text-[#64748b] leading-[1.65]">
-              I work closely with founders, product managers, and engineers to ship work that holds up under scrutiny. Remote-first, async-friendly, and comfortable leading design end to end.
+              I work closely with founders, product managers, and engineers to ship work that holds up. Remote-first, async-friendly, and comfortable leading design end to end.
             </p>
 
             {/* Skill tags */}
@@ -426,7 +426,7 @@ function SiteEnd() {
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.85, ease, delay: 0.08 }}
             >
-              Got something<br />
+              Have something<br />
               <span style={{ color: '#1a10d6' }}>worth building?</span>
             </motion.h2>
           </div>
@@ -440,7 +440,7 @@ function SiteEnd() {
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.75, ease, delay: 0.22 }}
           >
-            Available for freelance. If you have a product challenge worth solving, I&apos;d love to hear about it.
+            Open to new projects. If you have a product challenge worth solving, let&apos;s talk.
           </motion.p>
 
           {/* CTAs */}

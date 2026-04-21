@@ -162,9 +162,9 @@ export const projects: ProjectData[] = [
     slug: 'somfy',
     company: 'Somfy',
     tag: 'UX + Design System',
-    title: 'Building a unified design language across the entire product surface.',
+    title: 'Bringing one design language to every corner of the product.',
     description:
-      "Led the end-to-end redesign of core product flows for one of Europe's largest smart home companies. Established a scalable component library used by 6 product teams, cutting design-to-dev handoff time by 40%.",
+      "Redesigned core product flows for one of Europe's largest smart home companies. Built a scalable component library used by 6 product teams, cutting design-to-dev handoff time by 40%.",
     year: '2023',
     tags: ['Product Design', 'Design System', 'B2B'],
     outcome: '6 teams unified, 40% faster handoff',
@@ -174,32 +174,32 @@ export const projects: ProjectData[] = [
     category: 'Smart Home & Building Automation',
     period: 'Nov 2022 – Present',
     intro: [
-      'Somfy is a global leader in smart home and building automation, known for creating user-centric solutions that balance simplicity, comfort, and efficiency.',
-      "I've been collaborating with Somfy as a freelance product designer for almost 3 years, working on both B2B and B2C experiences. My focus has been on improving dashboards, refining key flows, and maintaining a scalable design system used across teams and products. It's an ongoing partnership that continues to evolve with new features and design improvements.",
+      'Somfy is a global leader in smart home and building automation, with a focus on products that make homes and buildings simpler, more comfortable, and more efficient.',
+      'I have been working with Somfy as a freelance product designer for almost 3 years, across both B2B and B2C experiences. My focus has been on improving dashboards, refining key flows, and maintaining a scalable design system used across teams and products. It is an ongoing collaboration that grows with each new feature.',
     ],
     detailTags: ['Design System', 'Product Design', 'App Design', 'Web Design'],
     sections: [
       {
         title: 'Dashboard & Order Tracking',
         body: [
-          'The first goal was to help professional clients better visualize their business data and follow their orders more effectively.',
-          'I redesigned the activity dashboard with a clear view of yearly performance and order activity, making business insights easier to access. The new order tracking flow simplified the navigation and reduced friction for recurring users, resulting in faster browsing and fewer support needs.',
+          'The first goal was to help professional clients see their business data more clearly and track orders without friction.',
+          'I redesigned the activity dashboard with a clear view of yearly performance and order activity. Business insights became easier to access at a glance. The new order tracking flow simplified navigation for recurring users, leading to faster browsing and fewer support requests.',
         ],
         images: [somfyScreen01, somfyScreen02],
       },
       {
-        title: 'Comparator experience',
+        title: 'Product Comparator',
         body: [
-          'I introduced a new product comparison experience that allows multi-selection and side-by-side evaluation.',
-          'This helped installers make decisions with greater confidence while improving catalog navigation and overall understanding.',
+          'I designed a new product comparison experience with multi-selection and side-by-side evaluation.',
+          'This helped installers make decisions with more confidence, while improving catalog navigation and overall product understanding.',
         ],
         images: [somfyScreen03, somfyScreen04],
       },
       {
         title: 'Homepage for Installers & Product Variants',
         body: [
-          'The new homepage was designed to make the experience more useful from the first interaction by organizing key actions, quick access tools, and relevant data.',
-          "I also worked on product variant tables to simplify technical data reading and reduce complexity. Both sections align with the new design system and can easily scale across Somfy's product range.",
+          'The new homepage was designed to be useful from the first interaction, with key actions, quick access tools, and relevant data organized in a clear hierarchy.',
+          "I also reworked the product variant tables to simplify technical data and reduce cognitive load. Both areas follow the new design system and scale cleanly across Somfy's full product range.",
         ],
         images: [somfyScreen05, somfyScreen06],
       },
@@ -210,9 +210,9 @@ export const projects: ProjectData[] = [
     slug: 'zestia',
     company: 'Zestia',
     tag: 'Real Estate SaaS',
-    title: 'Building a full MVP for a platform that unifies every step of property buying.',
+    title: 'Designing a full MVP that covers every step of the property buying process.',
     description:
-      'Collaborated directly with the CEO and CTO to design the full MVP from scratch, defining structure, user flows, and key experiences for brokers and buyers across property search, financing, and document management.',
+      'Worked directly with the CEO and CTO to design the full MVP from scratch: structure, user flows, and key experiences for brokers and buyers across property search, financing, and document management.',
     year: '2023',
     tags: ['Product Design', 'SaaS Design', 'MVP Design'],
     outcome: 'MVP ready for investors in 6 months',
@@ -222,24 +222,24 @@ export const projects: ProjectData[] = [
     category: 'Real Estate SaaS',
     period: '2023 (6 months)',
     intro: [
-      'Zestia is a real estate SaaS that brings every step of property buying into one process: property search, financing, and brokerage services.',
-      'I worked directly with the CEO and CTO as a freelance senior product designer, fully remote from Spain. Starting from zero, I designed the full MVP, defining the information architecture, core user flows, and visual system for each profile type. After 6 months, the product was ready for investor demos and pilot users.',
+      'Zestia is a real estate SaaS that brings the full property buying journey into one place: search, financing, and brokerage services, all connected.',
+      'I worked directly with the CEO and CTO as a freelance senior product designer, fully remote from Spain. Starting from zero, I designed the full MVP: information architecture, core user flows, and the visual system for each profile type. After 6 months, the product was ready for investor demos and pilot users.',
     ],
     detailTags: ['Design System', 'Product Design', 'SaaS Design', 'MVP Design'],
     sections: [
       {
         title: 'Dashboards & Analytics',
         body: [
-          'I designed two main dashboard views: one for individual franchise activity and another for multi-franchise global oversight.',
-          'Each dashboard was built around role-adaptive interfaces that surface the right data at the right time. The goal was clear insights at a glance, with balanced data visualisation that avoids cognitive overload across different user levels.',
+          'I designed two dashboard views: one for individual franchise activity, one for multi-franchise global oversight.',
+          'Each view was built around role-adaptive interfaces that surface the right data at the right moment. The goal was clear insights at a glance, with data visualisation that stays readable across different user levels.',
         ],
         images: [zestiaScreen01, zestiaScreen02],
       },
       {
-        title: 'Flows & Experience',
+        title: 'Core Flows',
         body: [
-          'I created the core MVP flows covering property search, financing, and document management, designed to reduce friction and enhance collaboration between brokers and buyers.',
-          'Each journey was mapped end to end, with careful attention to the handoff points between profiles. The result was a coherent, scalable experience that made a complex process feel manageable from day one.',
+          'I designed the main MVP flows for property search, financing, and document management, with a focus on reducing friction and making collaboration between brokers and buyers feel natural.',
+          'Each journey was mapped end to end, with close attention to the handoff points between profiles. The result was a coherent, scalable experience that made a complex process feel approachable from day one.',
         ],
         images: [zestiaScreen03],
       },
@@ -250,9 +250,9 @@ export const projects: ProjectData[] = [
     slug: 'vibe',
     company: 'Vibe',
     tag: 'Product Redesign',
-    title: 'Rethinking the core product experience for a fast-growing ad-tech platform.',
+    title: 'Rebuilding the core experience for a fast-growing ad-tech platform.',
     description:
-      'Took ownership of core product flows, redesigned the campaign creation experience, and built a scalable design system to support the next growth phase. Shipped key features in short, focused sprints over 15 months.',
+      'Took ownership of core product flows, redesigned the campaign creation experience, and built a scalable design system to support the next growth phase. Shipped key features in short, focused sprints across 15 months.',
     year: '2023',
     tags: ['Product Design', 'Adtech', 'Design System'],
     outcome: '15 months, full product overhaul',
@@ -262,16 +262,16 @@ export const projects: ProjectData[] = [
     category: 'Ad-tech',
     period: 'Jan 2022 – Mar 2023',
     intro: [
-      'Vibe is the Google Ads of TV. It allows any marketer to plan, buy, and air TV ads on major channels within minutes.',
-      "I worked with Vibe for 1.5 years as a freelance product designer, fully remote from Spain. The product team was small, around 10 people across Paris and the US. When I joined, an MVP had already been built by a previous designer, and my role was to bring fresh ideas, rework key flows, and build a strong design system for scalability. During this time, I designed new features, improved the campaign creation experience, and helped shape the structure that supported Vibe's next growth phase.",
+      'Vibe is the Google Ads of TV. Any marketer can plan, buy, and air TV ads on major channels in minutes.',
+      "I worked with Vibe for 1.5 years as a freelance product designer, fully remote from Spain. The team was small, around 10 people split between Paris and the US. When I joined, an MVP was already in place, and my role was to bring fresh thinking, rework key flows, and build a solid design system for scalability. I shipped new features, improved the campaign creation experience, and helped shape the foundation for Vibe's next growth phase.",
     ],
     detailTags: ['Design System', 'Product Design', 'SaaS Design'],
     sections: [
       {
         title: 'Campaign Dashboard & Creation Flow',
         body: [
-          'The first focus was to redesign the full campaign experience, from creation to tracking. We simplified the flow to help users create and manage campaigns faster while keeping a clear sense of control.',
-          'The new dashboard offers a cleaner overview of active campaigns and performance metrics. Campaign creation was redesigned step by step, with simpler targeting, audience selection, and scheduling.',
+          'The first focus was redesigning the full campaign experience, from creation to tracking. We simplified the flow so users could build and manage campaigns faster, without losing clarity or control.',
+          'The new dashboard gives a cleaner view of active campaigns and key metrics. Campaign creation was redesigned step by step, with simpler targeting, audience selection, and scheduling.',
         ],
         images: [vibeScreen03],
         video: vibeCampaignsVideo,
@@ -279,16 +279,16 @@ export const projects: ProjectData[] = [
       {
         title: 'Campaign Views & Analytics',
         body: [
-          'Once the creation flow was stable, we worked on the campaign management views and analytics. These sections help users review performance across multiple campaigns and act on insights directly.',
-          'I designed table views with filters and custom sorting options, and a new analytics dashboard focused on clarity and comparison. The goal was to give users data that feels accessible and actionable without adding complexity.',
+          'With the creation flow stable, we moved to campaign management views and analytics. The goal was to help users review performance across multiple campaigns and act on insights without switching context.',
+          'I designed table views with filters and custom sorting, and a new analytics dashboard built around clarity and comparison. Data should feel actionable, not overwhelming.',
         ],
         images: [vibeScreen01, vibeScreen02, vibeScreen04],
       },
       {
         title: 'User Management & Permissions',
         body: [
-          'I also created the flows for user management, team access, and billing. This made the product easier to scale and adapt to different organization types like agencies and brands.',
-          'Everything was documented in Storybook with consistent components and behaviors.',
+          'I also designed the flows for user management, team access, and billing. This made the product easier to scale across different organization types, from independent agencies to large brands.',
+          'All components and behaviors were documented in Storybook for clean, consistent handoff.',
         ],
         images: [vibeScreen05, vibeScreen06],
       },
@@ -299,9 +299,9 @@ export const projects: ProjectData[] = [
     slug: '360learning',
     company: '360Learning',
     tag: 'Platform Redesign',
-    title: 'Simplifying course creation for 1,700+ enterprise clients worldwide.',
+    title: 'Making course creation faster and simpler for 1,700+ enterprise clients.',
     description:
-      'Embedded with cross-functional teams to untangle complex authoring flows and surface learner insights. Reduced course creation time by 30% through strategic information architecture changes and a new component system.',
+      'Embedded with cross-functional teams to untangle complex authoring flows and bring learner insights to the surface. Reduced course creation time by 30% through strategic information architecture changes and a new component system.',
     year: '2022',
     tags: ['UX Research', 'Platform Design', 'SaaS'],
     outcome: '1,700+ clients, 30% faster course creation',
@@ -311,32 +311,32 @@ export const projects: ProjectData[] = [
     category: 'LMS EdTech / Learning & Development',
     period: 'Dec 2018 – Jan 2022',
     intro: [
-      '360Learning is a collaborative learning platform that helps companies build and share knowledge internally.',
-      'I joined the company in December 2018 and worked there for more than 3 years as a Product Designer in the Enterprise squad. Our squad included one PM and two developers, and I was part of a design team of eight designers, each owning a different product area. My main mission was to design and grow the enterprise suite of the product, while also maintaining the design system used across all squads.',
+      '360Learning is a collaborative learning platform that helps companies build and share knowledge from the inside.',
+      'I joined in December 2018 and worked there for over 3 years as a Product Designer in the Enterprise squad. Our squad had one PM and two developers, and I was part of a design team of eight, each owning a different product area. My main focus was designing and growing the enterprise suite, while also maintaining the shared design system across all squads.',
     ],
     detailTags: ['Product Design', 'Design System', 'Web Design', 'SaaS Design'],
     sections: [
       {
         title: 'Learning Needs',
         body: [
-          'The first area I worked on was Learning Needs, one of the key features for knowledge sharing inside a company. It allows employees to express what they want to learn and connect with others who have expertise on the same topic.',
-          'When someone creates a new learning need, colleagues can upvote it, join the discussion, and even volunteer to create a course to answer that need. We built the full experience: collecting requests, finding contributors, and managing the collaboration and course creation. The goal was to make internal learning more organic, social, and transparent.',
+          'The first feature I worked on was Learning Needs, a key tool for knowledge sharing inside a company. It lets employees express what they want to learn and find colleagues with the right expertise.',
+          'When someone submits a learning need, others can upvote it, join the conversation, and even volunteer to create a course in response. We designed the full experience: collecting requests, finding contributors, and managing collaboration through to course creation. The goal was to make internal learning feel more organic, social, and visible.',
         ],
         images: [screen360_01, screen360_02],
       },
       {
         title: 'Course Structure & Draft Management',
         body: [
-          'Once a learning need is validated, the team starts building the course. This part of the experience focuses on planning, organizing, and assigning work before the actual course creation begins.',
-          'We designed a clean interface to manage drafts, define structure and content, and clarify who is responsible for each step. It helped teams stay efficient and keep everyone aligned from the start of the process.',
+          'Once a learning need is validated, the team starts building the course. This part of the experience is about planning, organizing, and assigning work before creation actually begins.',
+          'We designed a clean interface to manage drafts, define structure and content, and clarify ownership at each step. It kept teams efficient and aligned right from the start.',
         ],
         images: [screen360_03, screen360_04],
       },
       {
         title: 'Design System',
         body: [
-          'In parallel with product work, I helped maintain the shared design system used across all squads at 360Learning. With a design team of 8 (each owning a different product area), a solid shared system was the only way to stay consistent. Regular cross-squad syncs helped surface new patterns early and prevent fragmentation.',
-          'The system covered everything from atoms to complex patterns like modals, forms, and data tables. I worked closely with developers to define handoff standards, write usage guidelines, and document edge cases. Keeping it alive meant constantly reviewing new requests and making sure nothing was built twice.',
+          'Alongside product work, I helped maintain the shared design system used across all squads at 360Learning. With a team of 8 designers, each owning a separate product area, a solid shared system was the only way to keep things consistent. Regular cross-squad syncs helped catch new patterns early and avoid fragmentation.',
+          'The system covered everything from basic atoms to complex patterns like modals, forms, and data tables. I worked closely with developers to define handoff standards, write usage guidelines, and document edge cases. Keeping it healthy meant reviewing new requests constantly and making sure nothing got built twice.',
         ],
         images: [screen360_05, screen360_06],
       },
@@ -347,9 +347,9 @@ export const projects: ProjectData[] = [
     slug: 'axa',
     company: 'AXA',
     tag: 'Design System',
-    title: 'Building consistent digital experiences across insurance and banking.',
+    title: 'Bringing design consistency to two major product lines: insurance and banking.',
     description:
-      'Worked as a consulting product designer through agency Monsieur Guiz for one year: six months with AXA Bank and six months with AXA Insurance. Focused on new features, design system components, and aligning design with development.',
+      'Worked as a consulting product designer through agency Monsieur Guiz for one year, six months with AXA Bank and six months with AXA Insurance. Focused on new features, design system components, and closing the gap between design and development.',
     year: '2018',
     tags: ['Design System', 'Product Design', 'App Design'],
     outcome: 'Insurance & banking, 2 product lines',
@@ -359,32 +359,32 @@ export const projects: ProjectData[] = [
     category: 'Insurance / Bank',
     period: 'Aug 2017 – Nov 2018',
     intro: [
-      'AXA is a global leader in banking and insurance services.',
-      'During my time at the agency Monsieur Guiz, I worked as a consulting product designer for AXA for about one year, six months with AXA Bank and six months with AXA Insurance. My work focused on creating new features, maintaining the design system, and helping teams align design and development around a consistent product language.',
+      'AXA is one of the world\'s largest insurance and banking groups, operating across more than 50 countries.',
+      'Through agency Monsieur Guiz, I worked as a consulting product designer for AXA for about one year: six months with AXA Bank and six months with AXA Insurance. My work covered new features, design system maintenance, and helping teams align design and development around a shared product language.',
     ],
     detailTags: ['Design System', 'Product Design', 'App Design', 'Illustrations'],
     sections: [
       {
         title: 'AXA Insurance & Bank Website',
         body: [
-          'At AXA Insurance, I contributed to the website evolution by creating new features and improving the design system foundations. Work involved layouts, navigation, and responsive guidelines to provide flexibility across products and devices.',
-          'For AXA Bank, I created responsive layouts and visuals for a website introducing the new mobile app, showcasing features while maintaining brand consistency.',
+          'At AXA Insurance, I contributed to the website by designing new features and strengthening the design system foundations. The work covered layouts, navigation, and responsive guidelines to keep flexibility across products and devices.',
+          'For AXA Bank, I designed responsive layouts and visuals for a website presenting the new mobile app, making features easy to understand while staying true to the brand.',
         ],
         images: [axaScreen01, axaScreen02],
       },
       {
         title: 'Design System',
         body: [
-          'I also worked on the shared AXA Design System, building components and defining spacing, constraints, and documentation for developers.',
-          'The focus was on clarity and adaptability, making sure each component could be used consistently across different teams and use cases without losing flexibility.',
+          'I also contributed to the shared AXA Design System, building components and defining spacing, constraints, and documentation for development teams.',
+          'The priority was clarity and adaptability. Each component needed to work consistently across different teams and contexts without becoming rigid.',
         ],
         images: [axaScreen03, axaScreen04],
       },
       {
         title: 'Illustrations',
         body: [
-          "In parallel, I created a set of custom illustrations for AXA Bank's website and app.",
-          'These visuals helped communicate complex topics in a more friendly and human way, making the product feel more approachable for everyday users.',
+          "Alongside the product work, I created a set of custom illustrations for AXA Bank's website and app.",
+          'These visuals helped explain complex financial topics in a friendlier, more human way, making the product feel more accessible to everyday users.',
         ],
         images: [axaScreen05],
       },
