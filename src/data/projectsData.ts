@@ -165,7 +165,7 @@ export const projects: ProjectData[] = [
     title: 'Bringing one design language to every corner of the product.',
     description:
       "Redesigned core product flows for one of Europe's largest smart home companies. Built a scalable component library used by 6 product teams, cutting design-to-dev handoff time by 40%.",
-    year: '2023',
+    year: 'Current',
     tags: ['Product Design', 'Design System', 'B2B'],
     outcome: '6 teams unified, 40% faster handoff',
     accent: 'amber',
