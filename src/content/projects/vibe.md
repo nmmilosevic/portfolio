@@ -19,7 +19,7 @@ owned:
   - The design system, documented in Storybook
 team: A small team of around 10 people split between Paris and the US. I worked fully remote from Spain.
 results:
-  - { value: '15', label: months of short, focused sprints }
+  - { value: '15', label: months shipping new features in short sprints }
 tags: [Design system, Product design, SaaS design]
 chapters:
   - title: Campaign dashboard and creation flow
