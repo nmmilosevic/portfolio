@@ -3,7 +3,6 @@ import { getCollection, render } from 'astro:content';
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Shot from '../../components/Shot.astro';
-import Button from '../../components/Button.astro';
 
 export async function getStaticPaths() {
   const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
@@ -28,7 +27,6 @@ const facts = [
 <Layout title={p.title} description={p.summary} image={p.cover.src}>
   <article>
     <header class="intro grid">
-      <div class="back" data-fade><Button href="/#work" variant="secondary" size="sm">All work</Button></div>
       <h1 class="name t-display-l" data-split>{p.title}</h1>
       <p class="summary t-display-s" data-split>{p.summary}</p>
     </header>
@@ -113,7 +111,6 @@ const facts = [
 
 <style>
   .intro { padding-top: calc(var(--layout-header) + var(--space-5)); row-gap: var(--space-5); }
-  .back { grid-column: 1 / -1; }
   .name { grid-column: 1 / -1; }
   .summary { grid-column: 1 / span 10; max-width: none; }
 
