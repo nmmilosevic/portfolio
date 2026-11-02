@@ -19,7 +19,8 @@ interface Props {
 const { title, description = site.description, image } = Astro.props;
 const fullTitle = title ? `${title}, ${site.name}` : `${site.name}, ${site.role}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const ogImage = image ? new URL(image, Astro.site) : undefined;
+// Pages without their own image share the site one, made in Figma (public/share.png, 1200 x 630).
+const ogImage = new URL(image ?? '/share.png', Astro.site);
 ---
 
 <!doctype html>
@@ -39,8 +40,12 @@ const ogImage = image ? new URL(image, Astro.site) : undefined;
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
-    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:image" content={ogImage} />
+    {!image && <meta property="og:image:width" content="1200" />}
+    {!image && <meta property="og:image:height" content="630" />}
+    <meta property="og:image:alt" content={image ? fullTitle : `${site.name}, ${site.role}`} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
 
     <!-- Runs before first paint so the theme never flashes. -->
     <script is:inline>

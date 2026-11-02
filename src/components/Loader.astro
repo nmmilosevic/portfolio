@@ -29,7 +29,7 @@ const columns = Array.from({ length: 12 });
     position: absolute;
     inset: 0;
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
   }
   .loader-columns span {
     background: var(--color-gray-1000);
@@ -47,9 +47,11 @@ const columns = Array.from({ length: 12 });
   .name { grid-column: 1 / span 8; }
   .count { grid-column: -3 / -1; text-align: right; }
   @media (max-width: 900px) {
+    .loader-columns span:nth-child(n + 7) { display: none; }
     .name { grid-column: 1 / span 4; }
   }
   @media (max-width: 560px) {
+    .loader-columns span:nth-child(n + 5) { display: none; }
     .name { grid-column: 1 / span 3; }
     .count { grid-column: -2 / -1; }
   }

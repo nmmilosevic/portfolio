@@ -6,8 +6,6 @@ interface Props {
   src: ImageMetadata;
   alt: string;
   sizes?: string;
-  /** Number of blinds in the reveal. Match it roughly to the columns the image spans. */
-  slats?: number;
   eager?: boolean;
   /** Shared name for the card-to-page morph. */
   morph?: string;
@@ -15,11 +13,10 @@ interface Props {
   class?: string;
 }
 
-const { src, alt, sizes = '100vw', slats = 6, eager = false, morph, cover = false, class: className } = Astro.props;
-const style = `--slats: ${slats}`;
+const { src, alt, sizes = '100vw', eager = false, morph, cover = false, class: className } = Astro.props;
 ---
 
-<figure class:list={['shot', 'reveal', className]} style={style} data-cover={cover ? '' : undefined} data-morph={morph}>
+<figure class:list={['shot', 'reveal', className]} data-cover={cover ? '' : undefined} data-morph={morph}>
   <div class="reveal-scale">
     <Image
       class="reveal-media"

@@ -10,7 +10,6 @@ interface Props {
 const { project } = Astro.props;
 const p = project.data;
 const preview = await getImage({ src: p.cover, width: 960, format: 'webp', quality: 78 });
-const slats = Math.max(3, p.place.span);
 // Smaller cards drift more, which gives the grid its depth. The picture itself is never cropped.
 const drift = p.place.span <= 5 ? 0.05 : 0.025;
 ---
@@ -21,7 +20,6 @@ const drift = p.place.span <= 5 ? 0.05 : 0.025;
       src={p.cover}
       alt={p.coverAlt}
       sizes={`(max-width: 900px) 100vw, ${Math.round((p.place.span / 12) * 100)}vw`}
-      slats={slats}
       eager={p.order === 1}
       morph={`cover-${project.id}`}
     />

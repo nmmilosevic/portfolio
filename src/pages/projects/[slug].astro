@@ -44,7 +44,7 @@ const facts = [
 
     <div class="cover grid">
       <div class="full">
-        <Shot src={p.cover} alt={p.coverAlt} slats={12} eager cover morph={`cover-${project.id}`} />
+        <Shot src={p.cover} alt={p.coverAlt} eager cover morph={`cover-${project.id}`} />
       </div>
     </div>
 
@@ -91,7 +91,7 @@ const facts = [
               </div>
             )}
             {chapter.media.map((m) => (
-              <Shot src={m.src} alt={m.alt} sizes="(max-width: 900px) 100vw, 66vw" slats={8} />
+              <Shot src={m.src} alt={m.alt} sizes="(max-width: 900px) 100vw, 66vw" />
             ))}
           </div>
         </section>

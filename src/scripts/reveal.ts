@@ -57,17 +57,27 @@ function split(el: HTMLElement) {
   el.classList.add('is-split');
 }
 
+// Where each strip starts, in % of the image: one strip per grid column the image covers at this screen size.
+function stripEdges(el: HTMLElement) {
+  const { left, width } = el.getBoundingClientRect();
+  const inner = $$('[data-grid-overlay] .rest > span')
+    .map((column) => column.getBoundingClientRect())
+    .filter((column) => column.width > 0 && column.left > left + 2 && column.left < left + width - 2)
+    .map((column) => ((column.left - left) / width) * 100);
+  return [0, ...inner, 100];
+}
+
 // Strips in the page colour cover the image, then shrink along the columns. Only transforms animate, so nothing repaints.
 export function openBlinds(el: HTMLElement) {
   el.querySelector(':scope > .blinds')?.remove();
-  const count = Number(getComputedStyle(el).getPropertyValue('--slats')) || 6;
+  const edges = stripEdges(el);
   const blinds = document.createElement('div');
   blinds.className = 'blinds';
   blinds.setAttribute('aria-hidden', 'true');
-  for (let i = 0; i < count; i++) {
+  for (let i = 0; i < edges.length - 1; i++) {
     const strip = document.createElement('span');
-    strip.style.left = `${(i * 100) / count}%`;
-    strip.style.width = `calc(${100 / count}% + 1px)`;
+    strip.style.left = `${edges[i]}%`;
+    strip.style.width = `calc(${edges[i + 1] - edges[i]}% + 1px)`;
     blinds.append(strip);
   }
   el.append(blinds);
