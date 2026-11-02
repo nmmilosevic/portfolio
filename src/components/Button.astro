@@ -1,0 +1,36 @@
+---
+// With href it renders a link, without it a button. Same look and states either way.
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary';
+  size?: 'sm' | 'md' | 'lg';
+  disabled?: boolean;
+  external?: boolean;
+  type?: 'button' | 'submit';
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { href, variant = 'primary', size = 'md', disabled = false, external = false, type = 'button', class: className, ...rest } = Astro.props;
+const classes = ['btn', `btn-${variant}`, `btn-${size}`, className];
+---
+
+{
+  href ? (
+    <a
+      class:list={classes}
+      href={disabled ? undefined : href}
+      aria-disabled={disabled ? 'true' : undefined}
+      tabindex={disabled ? -1 : undefined}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noopener' : undefined}
+      {...rest}
+    >
+      <slot />
+    </a>
+  ) : (
+    <button class:list={classes} type={type} disabled={disabled} {...rest}>
+      <slot />
+    </button>
+  )
+}

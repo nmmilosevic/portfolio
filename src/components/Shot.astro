@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  sizes?: string;
+  /** Number of blinds in the reveal. Match it roughly to the columns the image spans. */
+  slats?: number;
+  eager?: boolean;
+  /** Shared name for the card-to-page morph. */
+  morph?: string;
+  cover?: boolean;
+  class?: string;
+}
+
+const { src, alt, sizes = '100vw', slats = 6, eager = false, morph, cover = false, class: className } = Astro.props;
+const style = `--slats: ${slats}`;
+---
+
+<figure class:list={['shot', 'reveal', className]} style={style} data-cover={cover ? '' : undefined} data-morph={morph}>
+  <div class="reveal-scale">
+    <Image
+      class="reveal-media"
+      src={src}
+      alt={alt}
+      widths={[640, 960, 1440, 2000, 2880].filter((w) => w <= src.width)}
+      sizes={sizes}
+      format="webp"
+      quality={82}
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={eager ? 'high' : undefined}
+      decoding={eager ? 'sync' : 'async'}
+    />
+  </div>
+</figure>
+
+<style>
+  .shot { aspect-ratio: 16 / 10; }
+</style>

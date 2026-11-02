@@ -1,0 +1,58 @@
+---
+import { site } from '../data/site';
+const columns = Array.from({ length: 12 });
+---
+
+<!-- First visit of the session only. Waits for the real fonts and hero images, not a fake timer. -->
+<div class="loader" data-loader aria-hidden="true" transition:persist="loader">
+  <div class="loader-columns">{columns.map(() => <span></span>)}</div>
+  <div class="loader-label grid t-title">
+    <span class="name">{site.name}</span>
+    <span class="count tnum" data-loader-count>0</span>
+  </div>
+</div>
+
+<style>
+  .loader { display: none; }
+  :global(html.has-intro) .loader {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-loader);
+    pointer-events: none;
+    color: var(--color-gray-200);
+    /* Safety net: if JS never runs, the loader still goes away. */
+    animation: loader-failsafe 1ms 6s forwards;
+  }
+  @keyframes loader-failsafe { to { visibility: hidden; } }
+  .loader-columns {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .loader-columns span {
+    background: var(--color-gray-1000);
+    margin-right: -1px;
+    transform-origin: top;
+    transition: transform var(--duration-page) var(--ease-in-out);
+    transition-delay: calc(var(--i, 0) * var(--stagger-column));
+  }
+  .loader-label {
+    position: absolute;
+    inset-inline: 0;
+    bottom: var(--layout-margin);
+    transition: opacity var(--duration-fast) var(--ease-standard);
+  }
+  .name { grid-column: 1 / span 8; }
+  .count { grid-column: -3 / -1; text-align: right; }
+  @media (max-width: 900px) {
+    .name { grid-column: 1 / span 4; }
+  }
+  @media (max-width: 560px) {
+    .name { grid-column: 1 / span 3; }
+    .count { grid-column: -2 / -1; }
+  }
+  :global(.loader.is-leaving) .loader-label { opacity: 0; }
+  :global(.loader.is-leaving) .loader-columns span { transform: scaleY(0); }
+</style>

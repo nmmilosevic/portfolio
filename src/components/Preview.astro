@@ -1,0 +1,25 @@
+<!-- Floating screenshot for list rows. A row opts in with data-preview-src. -->
+<div class="preview" data-preview aria-hidden="true">
+  <div class="preview-clip"><img alt="" width="480" height="300" /></div>
+</div>
+
+<style>
+  .preview {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: var(--z-header);
+    pointer-events: none;
+    width: clamp(16rem, 28vw, 30rem);
+    margin: -9vw 0 0 2rem;
+  }
+  .preview-clip {
+    aspect-ratio: 16 / 10;
+    overflow: clip;
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path var(--duration-base) var(--ease-out);
+  }
+  .preview img { width: 100%; height: 100%; object-fit: cover; }
+  :global(.preview.is-on) .preview-clip { clip-path: inset(0); }
+  @media (hover: none), (pointer: coarse) { .preview { display: none; } }
+</style>

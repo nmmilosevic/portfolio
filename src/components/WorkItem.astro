@@ -1,0 +1,90 @@
+---
+import { getImage } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import Shot from './Shot.astro';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const p = project.data;
+const preview = await getImage({ src: p.cover, width: 960, format: 'webp', quality: 78 });
+const slats = Math.max(3, p.place.span);
+// Smaller cards drift more, which gives the grid its depth. The picture itself is never cropped.
+const drift = p.place.span <= 5 ? 0.05 : 0.025;
+---
+
+<li class="item" data-work-item data-parallax style={`--drift:${drift};--start:${p.place.start};--span:${p.place.span};--brand-on-grey:${p.brand.onGrey};--brand-on-black:${p.brand.onBlack}`}>
+  <a class="link brand-trigger" href={`/projects/${project.id}`} data-preview-src={preview.src}>
+    <Shot
+      src={p.cover}
+      alt={p.coverAlt}
+      sizes={`(max-width: 900px) 100vw, ${Math.round((p.place.span / 12) * 100)}vw`}
+      slats={slats}
+      eager={p.order === 1}
+      morph={`cover-${project.id}`}
+    />
+    <div class="meta">
+      <h3 class="title brand-name t-title">{p.title}</h3>
+      <p class="kind t-small muted">{p.kind}</p>
+      <p class="years t-small muted tnum">{p.years}{p.current && <span class="now"> <i aria-hidden="true"></i>Current</span>}</p>
+      <p class="card t-small muted">{p.card}</p>
+    </div>
+  </a>
+</li>
+
+<style>
+  .item {
+    grid-column: var(--start) / span var(--span);
+    --preview-on: 0;
+  }
+  .link { display: block; }
+  .meta {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-1) var(--layout-gutter);
+    padding-top: var(--space-4);
+  }
+  .title { grid-column: 1 / -1; }
+  .years { text-align: right; }
+  .now i {
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    margin: 0 0.35em 0 0.75em;
+    border-radius: 50%;
+    background: var(--accent);
+    vertical-align: 0.08em;
+  }
+  .card { grid-column: 1 / -1; max-width: 52ch; padding-top: var(--space-2); }
+
+  /* List layout, set by the switch above the projects */
+  :global([data-layout='list']) .item {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--line);
+    --preview-on: 1;
+  }
+  :global([data-layout='list']) .item:last-child { border-bottom: 1px solid var(--line); }
+  :global([data-layout='list']) .item :global(.shot),
+  :global([data-layout='list']) .item .card { display: none; }
+  :global([data-layout='list']) .item .meta {
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+    align-items: baseline;
+    padding-block: var(--space-4);
+  }
+  :global([data-layout='list']) .item .title { grid-column: 1 / span 6; font-size: var(--type-display-s-size); line-height: var(--type-display-s-leading); letter-spacing: var(--type-display-s-tracking); }
+  :global([data-layout='list']) .item .kind { grid-column: 7 / span 3; }
+  :global([data-layout='list']) .item .years { grid-column: 10 / -1; }
+
+  @media (max-width: 900px) {
+    .item { grid-column: 1 / -1; }
+    :global([data-layout='list']) .item .title { grid-column: 1 / -1; }
+    :global([data-layout='list']) .item .kind { grid-column: 1 / span 3; }
+    :global([data-layout='list']) .item .years { grid-column: 4 / -1; }
+  }
+  @media (max-width: 560px) {
+    :global([data-layout='list']) .item .kind { grid-column: 1 / span 2; }
+    :global([data-layout='list']) .item .years { grid-column: 3 / -1; }
+  }
+</style>

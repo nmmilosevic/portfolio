@@ -1,0 +1,81 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '@fontsource-variable/hubot-sans/standard.css';
+import fontUrl from '@fontsource-variable/hubot-sans/files/hubot-sans-latin-standard-normal.woff2?url';
+import '../styles/fonts.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import GridOverlay from '../components/GridOverlay.astro';
+import Loader from '../components/Loader.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const { title, description = site.description, image } = Astro.props;
+const fullTitle = title ? `${title}, ${site.name}` : `${site.name}, ${site.role}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = image ? new URL(image, Astro.site) : undefined;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" href={fontUrl} as="font" type="font/woff2" crossorigin />
+    <meta name="theme-color" content="#d9d9d9" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Runs before first paint so the theme never flashes. -->
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const apply = () => {
+          let hue = null;
+          try {
+            hue = localStorage.getItem('accent-hue');
+            localStorage.removeItem('theme');
+          } catch {}
+          // Grey is the only theme. Black comes from sections flipping the surface.
+          root.dataset.theme = 'light';
+          if (hue) root.style.setProperty('--color-accent-hue', hue);
+          root.classList.add('js');
+        };
+        apply();
+        try {
+          if (!sessionStorage.getItem('intro') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            root.classList.add('has-intro');
+          }
+        } catch {}
+        // The router replaces <html> attributes on each navigation.
+        document.addEventListener('astro:after-swap', apply);
+      })();
+    </script>
+    <ClientRouter />
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+    <Loader />
+    <GridOverlay />
+    <Header />
+    <main id="content"><slot /></main>
+    <Footer />
+    <script src="../scripts/app.ts"></script>
+  </body>
+</html>

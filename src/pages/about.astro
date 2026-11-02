@@ -1,0 +1,129 @@
+---
+import { getCollection } from 'astro:content';
+import { getImage } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Preview from '../components/Preview.astro';
+import Stats from '../components/Stats.astro';
+import LogoGrid from '../components/LogoGrid.astro';
+import { principles, skills, tools } from '../data/site';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const rows = await Promise.all(
+  projects.map(async (project) => ({
+    id: project.id,
+    data: project.data,
+    preview: (await getImage({ src: project.data.cover, width: 960, format: 'webp', quality: 78 })).src,
+  })),
+);
+---
+
+<Layout title="About" description="Nine years in product design, with fast-moving teams from early-stage startups to large companies.">
+  <header class="intro grid">
+    <h1 class="t-display-l" data-split>Nine years of untangling products, together with the people who build them.</h1>
+  </header>
+
+  <section class="bio grid section">
+    <p class="bio-lead t-lead" data-fade>
+      I'm Nicolas, a senior product designer based in Spain. I've spent nine years with fast-moving teams across Europe, from early-stage startups to large companies.
+    </p>
+    <div class="bio-text" data-fade>
+      <p>I turn messy, complex problems into simple product experiences. That can mean a full platform redesign, a new feature, or a design system. Whatever the size, I bring structure, clarity and care for the details.</p>
+      <p>I'm comfortable leading design from end to end. I'm just as happy being one voice in a good team. Most of my best work came from close, daily collaboration with people who see the problem differently from me.</p>
+    </div>
+  </section>
+
+  <section class="how" data-surface-trigger>
+    <div class="how-head grid">
+      <h2 class="t-display-m" data-split>How I work</h2>
+    </div>
+    <ol class="principles">
+      {
+        principles.map((item) => (
+          <li class="principle grid">
+            <h3 class="t-title" data-split>{item.title}</h3>
+            <p data-fade>{item.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+    <Stats />
+  </section>
+
+  <section class="section">
+    <div class="grid exp-head">
+      <h2 class="t-display-m" data-split>Experience</h2>
+    </div>
+    <ul class="experience">
+      {
+        rows.map((row) => (
+          <li>
+            <a class="row grid brand-trigger" href={`/projects/${row.id}`} data-preview-src={row.preview} style={`--preview-on:1;--brand-on-grey:${row.data.brand.onGrey};--brand-on-black:${row.data.brand.onBlack}`}>
+              <span class="row-name brand-name t-title">{row.data.title}</span>
+              <span class="row-role t-small muted">{row.data.role}</span>
+              <span class="row-period t-small muted tnum">{row.data.period}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <Preview />
+  </section>
+
+  <section class="kit grid">
+    <div class="kit-do">
+      <h2 class="t-small muted">What I do</h2>
+      <ul class="t-title">{skills.map((s) => <li data-fade>{s}</li>)}</ul>
+    </div>
+    <div class="kit-use">
+      <h2 class="t-small muted">What I use</h2>
+      <LogoGrid tools={tools} />
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .intro { padding-top: calc(var(--layout-header) + var(--space-8)); }
+  .intro h1 { grid-column: 1 / -1; }
+
+  .bio { row-gap: var(--space-6); }
+  .bio-lead { grid-column: 1 / span 7; max-width: none; }
+  .bio-text { grid-column: 8 / -1; display: flex; flex-direction: column; gap: var(--space-4); }
+
+  .how { padding-block: var(--space-section); }
+  .how-head { padding-bottom: var(--space-7); }
+  .how-head h2 { grid-column: 1 / -1; }
+  .principle { border-top: 1px solid var(--line); padding-block: var(--space-5) var(--space-7); row-gap: var(--space-3); }
+  .principle h3 { grid-column: 1 / span 6; }
+  .principle p { grid-column: 7 / span 5; }
+
+  .exp-head { padding-bottom: var(--space-7); }
+  .exp-head h2 { grid-column: 1 / -1; }
+  .experience li:last-child .row { border-bottom: 1px solid var(--line); }
+  .row {
+    align-items: baseline;
+    padding-block: var(--space-4);
+    border-top: 1px solid var(--line);
+  }
+  .row-name { grid-column: 1 / span 6; }
+  .row-role { grid-column: 7 / span 3; }
+  .row-period { grid-column: 10 / -1; text-align: right; }
+
+  .kit { row-gap: var(--space-7); }
+  .kit-do { grid-column: 1 / span 4; }
+  /* Subgrid: the logo cells below sit on the page's own columns. */
+  .kit-use { grid-column: 5 / -1; display: grid; grid-template-columns: subgrid; align-content: start; }
+  .kit-use h2 { grid-column: 1 / -1; }
+  .kit-do h2, .kit-use h2 { padding-bottom: var(--space-3); margin-bottom: var(--space-3); border-bottom: 1px solid var(--line); }
+
+  @media (max-width: 900px) {
+    .bio-lead, .bio-text, .principle h3, .principle p { grid-column: 1 / -1; }
+    .row-name { grid-column: 1 / -1; }
+    .row-role { grid-column: 1 / span 3; }
+    .row-period { grid-column: 4 / -1; }
+    .kit-do, .kit-use { grid-column: 1 / -1; }
+  }
+  @media (max-width: 560px) {
+    .row-role { grid-column: 1 / span 2; }
+    .row-period { grid-column: 3 / -1; }
+  }
+</style>

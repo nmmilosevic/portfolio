@@ -1,0 +1,114 @@
+/* The button. Colours are local variables, so a surface can restyle it without touching its states (see the footer).
+   .is-hover, .is-focus and .is-active only exist to show the states on /system. */
+@layer components {
+  .btn {
+    --btn-bg: transparent;
+    --btn-fg: var(--fg);
+    --btn-border: transparent;
+    --btn-hover-bg: var(--btn-bg);
+    --btn-hover-fg: var(--btn-fg);
+    --btn-hover-border: var(--btn-border);
+    --btn-active-bg: var(--btn-hover-bg);
+    --btn-active-fg: var(--btn-hover-fg);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--button-height);
+    padding-inline: var(--button-padding);
+    font-family: inherit;
+    font-size: var(--button-text);
+    font-weight: 550;
+    line-height: 1.1;
+    letter-spacing: 0;
+    white-space: nowrap;
+    text-decoration: none;
+    color: var(--btn-fg);
+    background: var(--btn-bg);
+    border: 1px solid var(--btn-border);
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      background-color var(--duration-fast) var(--ease-standard),
+      border-color var(--duration-fast) var(--ease-standard),
+      color var(--duration-fast) var(--ease-standard),
+      scale var(--duration-fast) var(--ease-out);
+  }
+
+  /* Sizes */
+  .btn-sm { --button-height: var(--button-height-sm); --button-padding: var(--button-padding-sm); --button-text: var(--type-small-size); }
+  .btn-md { --button-height: var(--button-height-md); --button-padding: var(--button-padding-md); --button-text: var(--type-small-size); }
+  .btn-lg { --button-height: var(--button-height-lg); --button-padding: var(--button-padding-lg); --button-text: var(--type-body-size); }
+  /* Fingers need at least 44px, whatever the size */
+  @media (pointer: coarse) { .btn { min-height: max(var(--button-height), 2.75rem); } }
+
+  /* Variants */
+  .btn-primary {
+    --btn-bg: var(--fill);
+    --btn-fg: var(--on-fill);
+    --btn-border: var(--fill);
+    --btn-hover-bg: var(--accent);
+    --btn-hover-fg: var(--on-accent);
+    --btn-hover-border: var(--accent);
+    --btn-active-bg: var(--accent-pressed);
+    --btn-active-fg: var(--on-accent);
+  }
+  .btn-secondary {
+    --btn-fg: var(--fill);
+    --btn-border: var(--fill);
+    --btn-hover-bg: var(--fill);
+    --btn-hover-fg: var(--on-fill);
+    --btn-hover-border: var(--fill);
+    --btn-active-bg: var(--accent-pressed);
+    --btn-active-fg: var(--on-accent);
+  }
+
+  /* Hover: only where a real pointer exists, so it never sticks on a phone */
+  @media (hover: hover) {
+    .btn:hover {
+      background: var(--btn-hover-bg);
+      border-color: var(--btn-hover-border);
+      color: var(--btn-hover-fg);
+    }
+  }
+  .btn.is-hover {
+    background: var(--btn-hover-bg);
+    border-color: var(--btn-hover-border);
+    color: var(--btn-hover-fg);
+  }
+
+  /* Selected: for buttons that switch something on */
+  .btn[aria-pressed='true'] {
+    background: var(--fill);
+    border-color: var(--fill);
+    color: var(--on-fill);
+  }
+
+  /* Pressed */
+  .btn:active, .btn.is-active {
+    background: var(--btn-active-bg);
+    border-color: var(--btn-active-bg);
+    color: var(--btn-active-fg);
+    scale: 0.97;
+  }
+
+  /* Keyboard focus */
+  .btn:focus-visible, .btn.is-focus {
+    outline: 2px solid var(--btn-focus, var(--focus));
+    outline-offset: 3px;
+  }
+
+  /* Disabled: stays readable, stops answering */
+  .btn:disabled, .btn[aria-disabled='true'] {
+    background: transparent;
+    border-color: var(--line);
+    color: var(--fg-muted);
+    cursor: not-allowed;
+    scale: 1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .btn:active, .btn.is-active { scale: 1; }
+  }
+}

@@ -1,0 +1,115 @@
+---
+import Button from './Button.astro';
+import { site } from '../data/site';
+const columns = Array.from({ length: 12 });
+const year = new Date().getFullYear();
+---
+
+<footer class="footer" data-surface-trigger>
+  <div class="cta" data-cta>
+    <div class="cta-fill grid" aria-hidden="true">{columns.map(() => <i></i>)}</div>
+    <div class="cta-inner grid">
+      <p class="cta-note t-small">{site.availability}</p>
+      <h2 class="cta-text t-display-l">Got a messy product problem? Tell me about it.</h2>
+      <div class="cta-action">
+        <Button href={site.linkedin} external size="lg">Write to me on LinkedIn</Button>
+      </div>
+    </div>
+  </div>
+
+  <div class="base grid t-small">
+    <p class="copy">© {year} {site.name}</p>
+    <nav class="links" aria-label="Footer">
+      <a href="/">Home</a>
+      <a href="/#work">Work</a>
+      <a href="/about">About</a>
+      <a href="/system">Design system</a>
+      {site.email && <a href={`mailto:${site.email}`}>Email</a>}
+      <a href={site.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+    <div class="hint muted">
+      <span class="time tnum" data-clock data-tz={site.timeZone}>{site.location}</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer { position: relative; z-index: var(--z-content); padding-top: var(--space-section); }
+  .cta { position: relative; display: block; isolation: isolate; overflow: clip; }
+  .cta-fill {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    padding-inline: 0;
+    column-gap: 0;
+    /* Always 12 strips in one row, whatever the page grid does on small screens. */
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+  .cta-fill i {
+    display: block;
+    margin-right: -1px;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform var(--duration-base) var(--ease-in-out);
+  }
+  .cta:hover .cta-fill i, .cta:focus-within .cta-fill i, .cta:global(.is-lit) .cta-fill i { transform: scaleY(1); }
+  .cta-fill i:nth-child(2) { transition-delay: 20ms; }
+  .cta-fill i:nth-child(3) { transition-delay: 40ms; }
+  .cta-fill i:nth-child(4) { transition-delay: 60ms; }
+  .cta-fill i:nth-child(5) { transition-delay: 80ms; }
+  .cta-fill i:nth-child(6) { transition-delay: 100ms; }
+  .cta-fill i:nth-child(7) { transition-delay: 120ms; }
+  .cta-fill i:nth-child(8) { transition-delay: 140ms; }
+  .cta-fill i:nth-child(9) { transition-delay: 160ms; }
+  .cta-fill i:nth-child(10) { transition-delay: 180ms; }
+  .cta-fill i:nth-child(11) { transition-delay: 200ms; }
+  .cta-fill i:nth-child(12) { transition-delay: 220ms; }
+
+  .cta-inner {
+    row-gap: var(--space-7);
+    padding-block: var(--space-7);
+    transition: color var(--duration-fast) var(--ease-standard);
+  }
+  :global(.is-flipping) .cta-inner { transition: none; }
+  .cta:hover .cta-inner, .cta:focus-within .cta-inner, .cta:global(.is-lit) .cta-inner { color: var(--on-accent); }
+  .cta-note { grid-column: 1 / -1; }
+  .cta-note::before {
+    content: '';
+    display: inline-block;
+    width: 0.55em;
+    height: 0.55em;
+    margin-right: 0.5em;
+    border-radius: 50%;
+    background: var(--accent);
+    vertical-align: 0.05em;
+  }
+  .cta:hover .cta-note::before, .cta:focus-within .cta-note::before, .cta:global(.is-lit) .cta-note::before { background: var(--on-accent); }
+  .cta-text { grid-column: 1 / -1; text-wrap: balance; }
+  .cta-action { grid-column: 1 / -1; }
+  /* On the blue fill, the button turns white and its states go to black. */
+  .cta:is(:hover, :focus-within, :global(.is-lit)) :global(.btn) {
+    --btn-bg: var(--on-accent);
+    --btn-fg: var(--accent);
+    --btn-border: var(--on-accent);
+    --btn-hover-bg: var(--color-gray-1000);
+    --btn-hover-fg: var(--color-gray-0);
+    --btn-hover-border: var(--color-gray-1000);
+    --btn-active-bg: var(--color-gray-800);
+    --btn-active-fg: var(--color-gray-0);
+    --btn-focus: var(--on-accent);
+  }
+
+  .base { row-gap: var(--space-4); padding-block: var(--space-6); align-items: baseline; }
+  .copy { grid-column: 1 / span 4; }
+  .links { grid-column: 5 / span 5; display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
+  .links a { text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 0.2em; transition: text-decoration-color var(--duration-instant) linear; }
+  .links a:hover { text-decoration-color: currentColor; }
+  .hint { grid-column: 10 / -1; display: flex; flex-direction: column; align-items: flex-end; gap: var(--space-1); text-align: right; }
+
+  @media (max-width: 900px) {
+    .copy { grid-column: 1 / -1; order: 3; }
+    .links { grid-column: 1 / -1; }
+    .hint { grid-column: 1 / -1; align-items: flex-start; text-align: left; }
+  }
+</style>

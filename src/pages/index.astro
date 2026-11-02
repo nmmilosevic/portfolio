@@ -1,0 +1,136 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import WorkItem from '../components/WorkItem.astro';
+import Preview from '../components/Preview.astro';
+import Stats from '../components/Stats.astro';
+import Button from '../components/Button.astro';
+import { site } from '../data/site';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Layout>
+  <section class="hero grid">
+    <h1 class="statement t-display-m" data-split="chars" data-proximity>
+      I design product interfaces and the systems behind them, and I stay with the team until it ships.
+    </h1>
+    <div class="hero-meta t-small">
+      <p data-fade>{site.role}</p>
+      <p data-fade style="--fade-delay: 80ms"><span class="tnum" data-clock data-tz={site.timeZone}>{site.location}</span><br /><span class="muted">Working remotely with teams around the world</span></p>
+      <p class="status" data-fade style="--fade-delay: 160ms"><i aria-hidden="true"></i>{site.availability}</p>
+    </div>
+  </section>
+
+  <section class="work" id="work">
+    <div class="work-head grid">
+      <h2 class="t-display-m" data-split>Work</h2>
+      <div class="work-controls">
+        <p class="t-small muted" data-fade>Five products from 2017 to today</p>
+        <div class="switch t-small" role="group" aria-label="Project layout" data-fade>
+          <button type="button" data-view="grid" aria-pressed="true">Grid</button>
+          <button type="button" data-view="list" aria-pressed="false">List</button>
+        </div>
+      </div>
+    </div>
+    <ul class="work-list grid" data-work data-layout="grid">
+      {projects.map((project) => <WorkItem project={project} />)}
+    </ul>
+    <Preview />
+  </section>
+
+  <section class="approach section" data-surface-trigger>
+    <div class="grid">
+      <p class="manifesto t-display-s" data-words>
+        Most projects reach me as a messy problem. I turn the mess into structure, and the structure into something people can use. I do it with the founders, PMs and engineers who will live with the result.
+      </p>
+      <div class="more"><Button href="/about" size="lg">More about how I work</Button></div>
+    </div>
+    <Stats />
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    min-height: 86svh;
+    align-content: space-between;
+    row-gap: var(--space-7);
+    padding-top: calc(var(--layout-header) + var(--space-7));
+    padding-bottom: var(--space-6);
+  }
+  .statement { grid-column: 1 / -1; }
+  .hero-meta {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+    row-gap: var(--space-4);
+  }
+  .hero-meta p:nth-child(1) { grid-column: 1 / span 6; }
+  .hero-meta p:nth-child(2) { grid-column: 7 / span 3; }
+  .hero-meta p:nth-child(3) { grid-column: 10 / -1; text-align: right; }
+  .status i {
+    display: inline-block;
+    width: 0.55em;
+    height: 0.55em;
+    margin-right: 0.5em;
+    border-radius: 50%;
+    background: var(--accent);
+    vertical-align: 0.05em;
+    animation: pulse 2.4s var(--ease-standard) infinite;
+  }
+  @keyframes pulse { 50% { opacity: 0.35; } }
+
+  /* Sits right under the hero, so the first screen already points at the work. */
+  .work { padding-top: var(--space-6); padding-bottom: var(--space-section); }
+  .work-head { row-gap: var(--space-5); align-items: end; padding-bottom: var(--space-7); }
+  .work-head h2 { grid-column: 1 / span 6; }
+  .work-controls {
+    grid-column: 7 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+    align-items: center;
+  }
+  .work-controls p { grid-column: 1 / span 3; }
+  .switch {
+    grid-column: 4 / -1;
+    justify-self: end;
+    display: flex;
+    padding: 3px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+  }
+  .switch button {
+    padding: 0.25rem 0.9rem;
+    border-radius: var(--radius-pill);
+    transition: background-color var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard), scale var(--duration-fast) var(--ease-out);
+  }
+  .switch button[aria-pressed='true'] { background: var(--fill); color: var(--on-fill); }
+  @media (hover: hover) { .switch button[aria-pressed='false']:hover { background: var(--line); } }
+  .switch button:active { scale: 0.97; }
+  /* During a page fade the colours follow the page: a local transition would make fill and label cross. */
+  :global(.is-flipping) .switch button { transition: none; }
+  @media (pointer: coarse) { .switch button { min-height: 2.75rem; } }
+  .work-list { row-gap: var(--space-8); align-items: start; }
+  .work-list[data-layout='list'] { row-gap: 0; }
+  .work-list :global(.item:nth-child(3)) { margin-top: var(--space-9); }
+  .work-list[data-layout='list'] :global(.item:nth-child(3)) { margin-top: 0; }
+  /* The right-hand card always starts lower, so the eye reads the projects in date order. */
+  .work-list :global(.item:nth-child(5)) { margin-top: var(--space-9); }
+  .work-list[data-layout='list'] :global(.item:nth-child(5)) { margin-top: 0; }
+
+  .manifesto { grid-column: 1 / span 10; max-width: none; text-wrap: wrap; }
+  .more { grid-column: 1 / -1; margin-top: var(--space-7); }
+
+  @media (max-width: 900px) {
+    .hero-meta p:nth-child(1), .hero-meta p:nth-child(2), .hero-meta p:nth-child(3) { grid-column: 1 / -1; text-align: left; }
+    .work-head h2, .work-controls { grid-column: 1 / -1; }
+    .work-controls p { grid-column: 1 / span 3; }
+    .work-list :global(.item:nth-child(n)) { margin-top: 0; }
+    .manifesto { grid-column: 1 / -1; }
+  }
+  @media (max-width: 560px) {
+    .work-controls p { grid-column: 1 / span 2; }
+    .switch { grid-column: 3 / -1; }
+  }
+  @media (prefers-reduced-motion: reduce) { .status i { animation: none; } }
+</style>

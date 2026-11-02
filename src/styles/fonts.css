@@ -1,0 +1,11 @@
+/* Hubot's zero is slashed, which reads badly in "2023" or "360Learning".
+   Mona Sans is its sister typeface, so its zero sits in the same design. Only that one glyph is loaded (1 KB). */
+@font-face {
+  font-family: 'Hubot Sans Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+  src: url('../assets/fonts/mona-sans-zero.woff2') format('woff2');
+  unicode-range: U+0030;
+}

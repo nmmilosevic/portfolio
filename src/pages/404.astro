@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+---
+
+<Layout title="Page not found">
+  <section class="missing grid">
+    <h1 class="t-display-l" data-split>This page doesn't exist.</h1>
+    <p class="t-lead" data-fade>The address may have changed. All the projects are on the home page.</p>
+    <div class="home"><Button href="/#work" size="lg">See all the work</Button></div>
+  </section>
+</Layout>
+
+<style>
+  .missing {
+    min-height: 80svh;
+    align-content: end;
+    row-gap: var(--space-5);
+    padding-top: calc(var(--layout-header) + var(--space-7));
+  }
+  h1, p, .home { grid-column: 1 / -1; }
+</style>

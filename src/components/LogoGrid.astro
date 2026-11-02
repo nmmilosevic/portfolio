@@ -1,0 +1,38 @@
+---
+interface Props {
+  tools: { name: string; logo: string }[];
+}
+
+const { tools } = Astro.props;
+const files = import.meta.glob<string>('../assets/logos/*.svg', { query: '?raw', import: 'default', eager: true });
+---
+
+<ul class="logos">
+  {
+    tools.map((tool, i) => (
+      <li class="logo" data-fade style={`--fade-delay:${i * 50}ms`}>
+        <span class="mark" aria-hidden="true" set:html={files[`../assets/logos/${tool.logo}.svg`]} />
+        <span class="t-small muted">{tool.name}</span>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  /* Each logo takes two page columns: four across on desktop, three on tablet, two on phones. */
+  .logos {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+    row-gap: var(--layout-gutter);
+  }
+  .logo {
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding-block: var(--space-3) var(--space-5);
+  }
+  .mark { display: block; width: clamp(2rem, 1.6rem + 1.4vw, 3rem); aspect-ratio: 1; }
+  .mark :global(svg) { width: 100%; height: 100%; }
+</style>

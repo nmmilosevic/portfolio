@@ -1,0 +1,401 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Shot from '../components/Shot.astro';
+import Button from '../components/Button.astro';
+import tokens from '../design-system/tokens.json';
+import sample from '../assets/projects/axa/05.png';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const t = tokens as any;
+const entries = (group: Record<string, any>) => Object.entries(group).filter(([k]) => !k.startsWith('$'));
+const grays = entries(t.color.gray);
+const typeRoles = entries(t.type);
+const spaces = entries(t.space);
+const durations = entries(t.duration);
+const eases = entries(t.ease);
+const semantics = entries(t.theme.light);
+const curve = (v: number[]) => `M0 60 C ${v[0] * 60} ${60 - v[1] * 60}, ${v[2] * 60} ${60 - v[3] * 60}, 60 0`;
+const hue = t.color.accent.hue.$value;
+
+const principles = [
+  { title: 'Grey is the default, black is the emphasis', text: 'Almost everything is grey and black. The page itself fades to black for the moments that matter.' },
+  { title: 'Colour means attention', text: 'The accent appears on links, focus and live states. Projects answer in their own product colours. Colour is never decoration.' },
+  { title: 'The grid is real', text: 'The lines on screen are the columns the layout uses. Press Shift + G to check.' },
+  { title: 'Motion moves along the grid', text: 'Pages rise through columns, images open in column-sized blinds, text rises line by line. One language, everywhere.' },
+];
+
+const buttonStates = [
+  { name: 'Default' },
+  { name: 'Hover', cls: 'is-hover' },
+  { name: 'Focus', cls: 'is-focus' },
+  { name: 'Pressed', cls: 'is-active' },
+  { name: 'Selected', pressed: 'true' },
+  { name: 'Disabled', disabled: true },
+];
+
+const components = [
+  { name: 'Button', use: 'Every call to action, as a link or a button, with all its states', file: 'src/components/Button.astro' },
+  { name: 'Shot', use: 'Uncropped image with blinds reveal', file: 'src/components/Shot.astro' },
+  { name: 'WorkItem', use: 'Project card that also works as a list row', file: 'src/components/WorkItem.astro' },
+  { name: 'Stats', use: 'Numbers that count up on scroll', file: 'src/components/Stats.astro' },
+  { name: 'LogoGrid', use: 'Tool logos placed on the main columns', file: 'src/components/LogoGrid.astro' },
+  { name: 'Preview', use: 'Floating screenshot for list rows', file: 'src/components/Preview.astro' },
+  { name: 'GridOverlay', use: 'Resting grid, pointer glow and Shift + G view', file: 'src/components/GridOverlay.astro' },
+  { name: 'Loader', use: 'First-visit intro, based on real loading', file: 'src/components/Loader.astro' },
+];
+
+const attributes = [
+  { attr: 'data-split', use: 'Text rises line by line. Use data-split="chars" for per-letter effects.' },
+  { attr: 'data-fade', use: 'Short supporting text fades in. Delay with --fade-delay.' },
+  { attr: 'data-words', use: 'Words light up one by one as you scroll.' },
+  { attr: 'data-parallax', use: 'The whole block drifts as you scroll, off the main thread. Set the distance with --drift, for example 0.05. Pictures stay uncropped.' },
+  { attr: 'data-count="50"', use: 'Number counts up. Add data-suffix for a unit.' },
+  { attr: 'data-surface-trigger', use: 'Page flips to the opposite surface while this section is centred.' },
+];
+---
+
+<Layout title="Design system" description="The tokens, type, grid, motion and components this site is built with.">
+  <header class="intro grid">
+    <h1 class="t-display-l" data-split>Design system</h1>
+    <p class="t-lead" data-fade>
+      Everything on this site comes from one tokens file and a small set of components. This page reads the same file, so it can't go out of date.
+    </p>
+    <p class="file t-small muted" data-fade>src/design-system/tokens.json</p>
+  </header>
+
+  <section class="block grid">
+    <h2 class="block-title t-title">Principles</h2>
+    <ul class="block-body principles">
+      {principles.map((p) => <li><h3 class="t-body">{p.title}</h3><p class="t-small muted">{p.text}</p></li>)}
+    </ul>
+  </section>
+
+  <section class="block grid">
+    <h2 class="block-title t-title">Accent</h2>
+    <div class="block-body on-grid accent-body">
+      <p class="t-small muted note">One number sets the whole accent. Move it and the site follows, on every page. Your choice stays in this browser only. To make it permanent, change <code>color.accent.hue</code> in the tokens.</p>
+      <div class="hue">
+        <input type="range" min="0" max="360" step="1" value={hue} data-hue aria-label="Accent hue" />
+        <output class="t-title tnum" data-hue-value>{hue}</output>
+        <div class="reset"><Button variant="secondary" size="sm" data-hue-reset>Reset</Button></div>
+      </div>
+      <div class="accent-demo">
+        <span class="swatch accent-swatch"></span>
+        <span class="t-small">--accent</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block grid">
+    <h2 class="block-title t-title">Project colours</h2>
+    <div class="block-body on-grid">
+      <p class="t-small muted note">Hovering a project turns its name to a colour sampled from its real screens, with one value for grey and one for black. Set them with <code>brand</code> in each project file. The classes are <code>.brand-trigger</code> on the link and <code>.brand-name</code> on the name.</p>
+      <ul class="brands">
+        {
+          projects.map((p) => (
+            <li class="brand t-small">
+              <div class="brand-sample on-grey"><span class="sample-name t-body" style={`color:${p.data.brand.onGrey}`}>{p.data.title}</span><span class="tnum">{p.data.brand.onGrey}</span></div>
+              <div class="brand-sample on-black"><span class="sample-name t-body" style={`color:${p.data.brand.onBlack}`}>{p.data.title}</span><span class="tnum">{p.data.brand.onBlack}</span></div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="block grid">
+    <h2 class="block-title t-title">Greys</h2>
+    <ul class="block-body grays">
+      {grays.map(([key, v]: any) => <li><span class="chip" style={`background:${v.$value}`}></span><span class="t-micro tnum">{key}</span><span class="t-micro muted tnum">{v.$value}</span></li>)}
+    </ul>
+  </section>
+
+  <section class="block grid">
+    <h2 class="block-title t-title">Semantic colours</h2>
+    <div class="block-body on-grid">
+      <p class="t-small muted note">Components only use these names. Each one has a value for grey and a value for black.</p>
+      <table role="table" class="table table-tokens t-small">
+        <thead role="rowgroup"><tr role="row"><th role="columnheader">Token</th><th role="columnheader">Grey</th><th role="columnheader">Black</th><th role="columnheader">Use</th></tr></thead>
+        <tbody role="rowgroup">
+          {
+            semantics.map(([key, v]: any) => (
+              <tr role="row">
+                <td role="cell" class="tnum">--{key}</td>
+                <td role="cell" class="muted" data-label="Grey">{String(v.$value).replace(/[{}]/g, '').replace('color.', '')}</td>
+                <td role="cell" class="muted" data-label="Black">{String(t.theme.dark[key].$value).replace(/[{}]/g, '').replace('color.', '')}</td>
+                <td role="cell" class="muted">{v.$description}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block grid">
+    <h2 class="block-title t-title">Type</h2>
+    <div class="block-body">
+      <p class="t-small muted note">Hubot Sans, one variable family with weight and width axes. Self-hosted, Open Font License. Roles are classes: <code>.t-body</code>, <code>.t-display-m</code> and so on.</p>
+      <ul class="types">
+        {
+          [...typeRoles].reverse().map(([key]: any) => (
+            <li>
+              <span class="t-micro muted role">{key}</span>
+              <span class={`t-${key} specimen`}>Good systems outlive me</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="block grid">
+    <h2 class="block-title t-title">Grid</h2>
+    <div class="block-body">
+      <p class="t-small muted note">12 columns above 900px, 6 down to 560px, 4 below. Margin and gutter scale with the viewport. A card picks its place with <code>place: &#123; start, span &#125;</code> in the project file.</p>
+      <Button variant="secondary" data-grid-toggle aria-pressed="false">Toggle the page grid</Button>
+    </div>
+    <div class="grid-demo" aria-hidden="true">{Array.from({ length: 12 }).map(() => <span></span>)}</div>
+  </section>
+
+  <section class="block grid">
+    <h2 class="block-title t-title">Space</h2>
+    <ul class="block-body spaces">
+      {spaces.map(([key, v]: any) => <li><span class="bar" style={`width:${v.$value}`}></span><span class="t-micro tnum">{key}</span><span class="t-micro muted tnum">{v.$value}</span></li>)}
+    </ul>
+  </section>
+
+  <section class="block grid">
+    <h2 class="block-title t-title">Motion</h2>
+    <div class="block-body on-grid">
+      <div class="eases">
+        {
+          eases.map(([key, v]: any) => (
+            <div class="ease">
+              <svg viewBox="-2 -2 64 64" width="96" height="96" aria-hidden="true"><path d={curve(v.$value)} fill="none" stroke="currentColor" stroke-width="1.5"></path></svg>
+              <p class="t-small">{key}</p>
+              <p class="t-micro muted">{v.$description}</p>
+            </div>
+          ))
+        }
+      </div>
+      <ul class="durations">
+        {durations.map(([key, v]: any) => <li class="t-small"><span>{key}</span><span class="muted tnum">{v.$value}</span><span class="muted">{v.$description}</span></li>)}
+      </ul>
+      <div class="replay-host" data-replay-host>
+        <div class="replay-demo">
+          <p class="t-display-s" data-split>Text rises line by line, inside a clip.</p>
+          <Shot src={sample} alt="Example image for the blinds reveal" sizes="(max-width: 900px) 100vw, 33vw" slats={4} />
+        </div>
+        <Button variant="secondary" data-replay>Replay</Button>
+      </div>
+    </div>
+  </section>
+
+  <section class="block grid">
+    <h2 class="block-title t-title">Buttons</h2>
+    <div class="block-body on-grid">
+      <p class="t-small muted note">Every call to action uses <code>Button</code>. With <code>href</code> it renders a link, without it a button. Text links are for navigation only.</p>
+      {
+        (['primary', 'secondary'] as const).map((variant) => (
+          <div class="states">
+            <h3 class="t-small state-title">{variant === 'primary' ? 'Primary' : 'Secondary'}</h3>
+            {buttonStates.map((st) => (
+              <div class="state">
+                <Button variant={variant} class={st.cls} disabled={st.disabled} aria-pressed={st.pressed} tabindex={-1}>{st.name}</Button>
+              </div>
+            ))}
+          </div>
+        ))
+      }
+      <div class="states">
+        <h3 class="t-small state-title">Sizes</h3>
+        <div class="state"><Button size="sm" tabindex={-1}>Small</Button></div>
+        <div class="state"><Button size="md" tabindex={-1}>Medium</Button></div>
+        <div class="state"><Button size="lg" tabindex={-1}>Large</Button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block grid">
+    <h2 class="block-title t-title">Components</h2>
+    <div class="block-body on-grid">
+      <table role="table" class="table table-components t-small">
+        <thead role="rowgroup"><tr role="row"><th role="columnheader">Name</th><th role="columnheader">What it does</th><th role="columnheader">File</th></tr></thead>
+        <tbody role="rowgroup">{components.map((c) => <tr role="row"><td role="cell">{c.name}</td><td role="cell" class="muted">{c.use}</td><td role="cell" class="muted">{c.file}</td></tr>)}</tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block grid">
+    <h2 class="block-title t-title">Motion attributes</h2>
+    <div class="block-body on-grid">
+      <p class="t-small muted note">Add one to any element, no JS to write. All of them respect the reduced motion setting.</p>
+      <table role="table" class="table table-attributes t-small">
+        <tbody role="rowgroup">{attributes.map((a) => <tr role="row"><td role="cell" class="attr">{a.attr}</td><td role="cell" class="muted">{a.use}</td></tr>)}</tbody>
+      </table>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .intro { padding-top: calc(var(--layout-header) + var(--space-8)); padding-bottom: var(--space-section); row-gap: var(--space-5); }
+  .intro h1 { grid-column: 1 / -1; }
+  .intro .t-lead { grid-column: 1 / span 8; max-width: none; }
+  .intro .file { grid-column: 1 / -1; }
+
+  .block { padding-block: var(--space-5) var(--space-9); border-top: 1px solid var(--line); margin-inline: var(--layout-margin); padding-inline: 0; row-gap: var(--space-4); }
+  .block-title { grid-column: 1 / span 4; }
+  .block-body { grid-column: 5 / -1; min-width: 0; }
+  .note { margin-bottom: var(--space-5); }
+  code { font: inherit; color: var(--fg); overflow-wrap: anywhere; }
+
+  .principles { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-5) var(--layout-gutter); }
+
+  .hue { display: grid; grid-template-columns: subgrid; align-items: center; margin-bottom: var(--space-4); }
+  /* Drawn by hand: a native slider changes colour on hover, so it would not match the token. */
+  .hue input {
+    grid-column: 1 / span 6;
+    width: 100%;
+    min-width: 0;
+    height: 1.5rem;
+    margin: 0;
+    background: none;
+    cursor: grab;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .hue input:active { cursor: grabbing; }
+  .hue input::-webkit-slider-runnable-track { height: 0.25rem; background: var(--accent); }
+  .hue input::-moz-range-track { height: 0.25rem; background: var(--accent); }
+  .hue input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-top: -0.5rem;
+    border-radius: 50%;
+    background: var(--accent);
+    transition: scale var(--duration-fast) var(--ease-out);
+  }
+  .hue input::-moz-range-thumb {
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 0;
+    border-radius: 50%;
+    background: var(--accent);
+    transition: scale var(--duration-fast) var(--ease-out);
+  }
+  .hue input:hover::-webkit-slider-thumb { scale: 1.2; }
+  .hue input:hover::-moz-range-thumb { scale: 1.2; }
+  .hue output { grid-column: 7 / span 1; }
+  .reset { grid-column: 8 / span 1; justify-self: start; }
+  .accent-demo { display: grid; grid-template-columns: subgrid; align-items: center; }
+  .accent-demo > :last-child { grid-column: 7 / -1; }
+  .swatch { display: block; width: 100%; height: 6rem; }
+  .accent-swatch { grid-column: 1 / span 6; background: var(--accent); transition: none; }
+
+  /* Lists below use subgrid, so they sit on the page's own columns at every width. */
+  .on-grid { display: grid; grid-template-columns: subgrid; }
+  .on-grid > * { grid-column: 1 / -1; }
+  .states { display: grid; grid-template-columns: subgrid; row-gap: var(--space-3); padding-block: var(--space-4); border-top: 1px solid var(--line); }
+  .state-title { grid-column: 1 / -1; }
+  .state { grid-column: span 2; display: flex; align-items: center; min-width: 0; }
+  .brands { display: grid; grid-template-columns: subgrid; row-gap: var(--layout-gutter); }
+  .brand { display: grid; grid-column: span 2; }
+  .brand-sample { display: flex; flex-direction: column; gap: 2px; padding: var(--space-3); min-height: 5.5rem; }
+  .on-grey { background: var(--color-gray-200); color: var(--color-gray-1000); box-shadow: inset 0 0 0 1px var(--line); }
+  .on-black { background: var(--color-gray-1000); color: var(--color-gray-100); }
+  .sample-name { margin-bottom: auto; font-weight: 550; }
+  .grays { display: grid; grid-template-columns: subgrid; row-gap: var(--space-3); }
+  .grays li { display: flex; flex-direction: column; gap: 2px; }
+  .chip { aspect-ratio: 1; display: block; margin-bottom: var(--space-1); box-shadow: inset 0 0 0 1px var(--line); }
+
+  /* Each table sits on the page columns. Column placement is per table. */
+  .table, .table thead, .table tbody, .table tr { display: grid; grid-template-columns: subgrid; grid-column: 1 / -1; font-variant-ligatures: none; }
+  .table th { text-align: left; font-weight: inherit; color: var(--fg-muted); padding-bottom: var(--space-2); }
+  .table tbody tr { border-top: 1px solid var(--line); padding-block: var(--space-2); }
+  .table td { min-width: 0; overflow-wrap: anywhere; }
+  .table-tokens tr > :nth-child(1) { grid-column: 1 / span 2; }
+  .table-tokens tr > :nth-child(2) { grid-column: 3 / span 2; }
+  .table-tokens tr > :nth-child(3) { grid-column: 5 / span 2; }
+  .table-tokens tr > :nth-child(4) { grid-column: 7 / span 2; }
+  .table-components tr > :nth-child(1) { grid-column: 1 / span 2; }
+  .table-components tr > :nth-child(2) { grid-column: 3 / span 3; }
+  .table-components tr > :nth-child(3) { grid-column: 6 / span 3; }
+  .table-attributes tr > :nth-child(1) { grid-column: 1 / span 2; }
+  .table-attributes tr > :nth-child(2) { grid-column: 3 / span 6; }
+
+  .types li { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-1); padding-block: var(--space-3); border-top: 1px solid var(--line); }
+  .specimen { overflow-wrap: anywhere; }
+
+  .grid-demo { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; height: 8rem; }
+  .grid-demo span { background: color-mix(in oklab, var(--accent) 22%, transparent); }
+  .spaces { display: grid; grid-template-columns: subgrid; }
+  .spaces li { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; align-items: center; padding-block: var(--space-1); }
+  .spaces li > :nth-child(1) { grid-column: 1 / span 2; }
+  .spaces li > :nth-child(2) { grid-column: 3 / span 2; }
+  .spaces li > :nth-child(3) { grid-column: 5 / span 4; overflow-wrap: anywhere; }
+  .bar { display: block; height: 0.75rem; background: var(--fg); max-width: 100%; }
+
+  .eases { display: grid; grid-template-columns: subgrid; row-gap: var(--space-5); margin-bottom: var(--space-7); }
+  .ease { grid-column: span 2; }
+  .ease svg { margin-bottom: var(--space-2); overflow: visible; }
+  .durations { display: grid; grid-template-columns: subgrid; }
+  .durations li { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; padding-block: var(--space-2); border-top: 1px solid var(--line); }
+  .durations li > :nth-child(1) { grid-column: 1 / span 2; }
+  .durations li > :nth-child(2) { grid-column: 3 / span 2; }
+  .durations li > :nth-child(3) { grid-column: 5 / span 4; }
+  .replay-host { margin-top: var(--space-7); }
+  .replay-demo { display: grid; grid-template-columns: 1fr 1fr; gap: var(--layout-gutter); align-items: start; margin-bottom: var(--space-4); }
+
+  @media (max-width: 900px) {
+    .block-title, .block-body, .intro .t-lead { grid-column: 1 / -1; }
+    .principles, .replay-demo { grid-template-columns: 1fr; }
+    .spaces li > :nth-child(1) { grid-column: 1 / span 2; }
+    .spaces li > :nth-child(2) { grid-column: 3 / span 2; }
+    .spaces li > :nth-child(3) { grid-column: 5 / span 2; }
+    .durations li > :nth-child(1) { grid-column: 1 / span 2; }
+    .durations li > :nth-child(2) { grid-column: 3 / span 1; }
+    .durations li > :nth-child(3) { grid-column: 4 / span 3; }
+    .hue input, .accent-swatch { grid-column: 1 / span 4; }
+    .hue output, .accent-demo > :last-child { grid-column: 5 / span 1; }
+    .reset { grid-column: 6 / span 1; }
+    .table-tokens tr > :nth-child(1) { grid-column: 1 / span 2; }
+    .table-tokens tr > :nth-child(2) { grid-column: 3 / span 1; }
+    .table-tokens tr > :nth-child(3) { grid-column: 4 / span 1; }
+    .table-tokens tr > :nth-child(4) { grid-column: 5 / span 2; }
+    .table-components tr > :nth-child(1) { grid-column: 1 / span 1; }
+    .table-components tr > :nth-child(2) { grid-column: 2 / span 3; }
+    .table-components tr > :nth-child(3) { grid-column: 5 / span 2; }
+    .table-attributes tr > :nth-child(1) { grid-column: 1 / span 2; }
+    .table-attributes tr > :nth-child(2) { grid-column: 3 / span 4; }
+    .grid-demo span:nth-child(n + 7) { display: none; }
+  }
+  /* Tables become stacked rows: the first cell is the name, the others sit under it. */
+  @media (max-width: 720px) {
+    .table, .table tbody, .table tr, .table td { display: block; }
+    .table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    .table tbody tr { padding-block: var(--space-3); }
+    .table td:first-child { color: var(--fg); font-weight: 550; margin-bottom: var(--space-1); }
+    .table td[data-label]::before { content: attr(data-label) ': '; }
+  }
+  @media (max-width: 560px) {
+    .grid-demo span:nth-child(n + 5) { display: none; }
+    .spaces li > :nth-child(1) { grid-column: 1 / span 2; }
+    .spaces li > :nth-child(2) { grid-column: 3 / span 1; }
+    .spaces li > :nth-child(3) { grid-column: 4 / span 1; }
+    .durations li > :nth-child(1) { grid-column: 1 / span 1; }
+    .durations li > :nth-child(2) { grid-column: 2 / span 1; }
+    .durations li > :nth-child(3) { grid-column: 3 / span 2; }
+    /* Slider, value, colour block, then Reset under it */
+    .accent-body { row-gap: var(--space-3); }
+    .hue, .accent-demo { display: contents; }
+    .accent-body > .note { grid-row: 1; margin-bottom: var(--space-2); }
+    .hue input { grid-row: 2; grid-column: 1 / -1; }
+    .hue output { grid-row: 3; grid-column: 1 / -1; }
+    .accent-swatch { grid-row: 4; grid-column: 1 / span 3; }
+    .accent-demo > :last-child { grid-row: 4; grid-column: 4 / span 1; align-self: center; }
+    .reset { grid-row: 5; grid-column: 1 / -1; }
+  }
+</style>

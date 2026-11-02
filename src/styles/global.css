@@ -1,0 +1,111 @@
+/* Cascade order: lower layers always lose to higher ones, so components never fight the reset. */
+@layer tokens, reset, base, layout, components, motion, utilities;
+
+@import './tokens.css';
+@import './button.css';
+@import './motion.css';
+@import './transitions.css';
+
+@layer reset {
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body, h1, h2, h3, h4, p, figure, ul, ol, dl, dd, blockquote { margin: 0; }
+  ul, ol { padding: 0; list-style: none; }
+  img, video, svg { display: block; max-width: 100%; }
+  img, video { height: auto; }
+  a { color: inherit; text-decoration: none; }
+  button, input { font: inherit; color: inherit; }
+  button { background: none; border: 0; padding: 0; cursor: pointer; }
+}
+
+@layer base {
+  :root {
+    --grid-columns: var(--layout-columns-wide);
+  }
+  /* Colours fade when a section flips the page. Tokens are registered with @property, so the browser can animate them.
+     --fill and --on-fill swap together at the middle of the fade: if a button's fill and label both faded, they would cross and the label would vanish. */
+  @media (prefers-reduced-motion: no-preference) {
+    :root {
+      transition-property: --bg, --bg-raised, --fg, --fg-muted, --line, --grid-line, --grid-glow, --fill, --on-fill;
+      transition-duration: var(--duration-surface), var(--duration-surface), var(--duration-surface), var(--duration-surface), var(--duration-surface), var(--duration-surface), var(--duration-surface), 0s, 0s;
+      transition-delay: 0s, 0s, 0s, 0s, 0s, 0s, 0s, calc(var(--duration-surface) / 2), calc(var(--duration-surface) / 2);
+      transition-timing-function: ease-in-out;
+    }
+  }
+  @media (max-width: 900px) { :root { --grid-columns: var(--layout-columns-mid); } }
+  @media (max-width: 560px) { :root { --grid-columns: var(--layout-columns-narrow); } }
+
+  html { background: var(--bg); }
+  body {
+    position: relative;
+    min-height: 100svh;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-leading);
+    font-weight: var(--type-body-weight);
+    font-synthesis: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+  main { position: relative; z-index: var(--z-content); }
+  ::selection { background: var(--accent); color: var(--on-accent); }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+  p { text-wrap: pretty; max-width: 62ch; }
+  h1, h2, h3 { font-weight: inherit; font-size: inherit; line-height: inherit; text-wrap: balance; }
+}
+
+@layer layout {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+    column-gap: var(--layout-gutter);
+    padding-inline: var(--layout-margin);
+  }
+  .section { padding-block: var(--space-section); }
+  .full { grid-column: 1 / -1; }
+}
+
+@layer components {
+  /* Project hover: only the name changes, to the product's own colour.
+     --brand-on-grey and --brand-on-black are set per project. */
+  .brand-trigger { --brand: var(--brand-on-grey); }
+  :root[data-theme='dark']:not([data-surface='inverse']) .brand-trigger,
+  :root[data-theme='light'][data-surface='inverse'] .brand-trigger { --brand: var(--brand-on-black); }
+  .brand-name { transition: color var(--duration-fast) var(--ease-standard); }
+  .brand-trigger:focus-visible .brand-name { color: var(--brand); }
+  @media (hover: hover) {
+    .brand-trigger:hover .brand-name { color: var(--brand); }
+  }
+}
+
+@layer components {
+  /* During the fade, these follow the page colours directly instead of restarting their own hover transition every frame. */
+  .is-flipping :is(.brand-name, .btn) { transition: none; }
+}
+
+@layer utilities {
+  .t-micro { font-size: var(--type-micro-size); line-height: var(--type-micro-leading); letter-spacing: var(--type-micro-tracking); font-weight: var(--type-micro-weight); }
+  .t-small { font-size: var(--type-small-size); line-height: var(--type-small-leading); letter-spacing: var(--type-small-tracking); font-weight: var(--type-small-weight); }
+  .t-body { font-size: var(--type-body-size); line-height: var(--type-body-leading); letter-spacing: var(--type-body-tracking); font-weight: var(--type-body-weight); }
+  .t-lead { font-size: var(--type-lead-size); line-height: var(--type-lead-leading); letter-spacing: var(--type-lead-tracking); font-weight: var(--type-lead-weight); }
+  .t-title { font-size: var(--type-title-size); line-height: var(--type-title-leading); letter-spacing: var(--type-title-tracking); font-weight: var(--type-title-weight); }
+  .t-display-s { font-size: var(--type-display-s-size); line-height: var(--type-display-s-leading); letter-spacing: var(--type-display-s-tracking); font-weight: var(--type-display-s-weight); word-spacing: 0.04em; }
+  .t-display-m { font-size: var(--type-display-m-size); line-height: var(--type-display-m-leading); letter-spacing: var(--type-display-m-tracking); font-weight: var(--type-display-m-weight); word-spacing: 0.05em; }
+  .t-display-l { font-size: var(--type-display-l-size); line-height: var(--type-display-l-leading); letter-spacing: var(--type-display-l-tracking); font-weight: var(--type-display-l-weight); word-spacing: 0.05em; }
+  .muted { color: var(--fg-muted); }
+  .tnum { font-variant-numeric: tabular-nums; }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+  }
+  .skip-link {
+    position: fixed; top: var(--space-2); left: var(--space-2); z-index: var(--z-loader);
+    padding: var(--space-2) var(--space-4); background: var(--accent); color: var(--on-accent);
+    border-radius: var(--radius-pill); translate: 0 -200%;
+  }
+  .skip-link:focus { translate: 0 0; }
+}

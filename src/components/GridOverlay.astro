@@ -1,0 +1,73 @@
+---
+// Same columns as .grid, so the lines you see are the ones the layout really uses.
+const columns = Array.from({ length: 12 });
+---
+
+<div class="grid-overlay" data-grid-overlay aria-hidden="true" transition:persist="grid-overlay">
+  <div class="grid layer rest">{columns.map(() => <span></span>)}</div>
+  <div class="glow" data-glow><div class="grid glow-lines">{columns.map(() => <span></span>)}</div></div>
+  <div class="grid layer fill">{columns.map(() => <span></span>)}</div>
+</div>
+
+<style>
+  .grid-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-grid);
+    pointer-events: none;
+    contain: strict;
+  }
+  .layer { position: absolute; inset: 0; }
+  .layer span { min-width: 0; }
+  .rest span { border-inline: 1px solid var(--grid-line); }
+  /* A soft round window that follows the pointer. Only transforms change: see initGridGlow. */
+  .glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 44rem;
+    height: 44rem;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity var(--duration-fast) var(--ease-standard);
+    -webkit-mask-image: radial-gradient(closest-side, #000, transparent);
+    mask-image: radial-gradient(closest-side, #000, transparent);
+    will-change: transform;
+  }
+  :global(.glow.is-on) { opacity: 1; }
+  .glow-lines { position: absolute; top: 0; left: 0; height: 100lvh; will-change: transform; }
+  .glow-lines span { border-inline: 1px solid var(--grid-glow); min-width: 0; }
+  @media (hover: none), (pointer: coarse) { .glow { display: none; } }
+
+  /* Shift + G: the columns fill up, like a layout grid in a design tool. */
+  .fill span {
+    background: color-mix(in oklab, var(--accent) 14%, transparent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform var(--duration-base) var(--ease-in-out);
+  }
+  :global(html.grid-on) .grid-overlay { z-index: var(--z-grid-visible); }
+  :global(html.grid-on) .fill span { transform: scaleY(1); }
+
+  /* Narrow screens have fewer columns: hide the extra ones */
+  @media (max-width: 900px) {
+    .layer span:nth-child(n + 7), .glow-lines span:nth-child(n + 7) { display: none; }
+  }
+  @media (max-width: 560px) {
+    .layer span:nth-child(n + 5), .glow-lines span:nth-child(n + 5) { display: none; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .fill span:nth-child(1) { transition-delay: 0ms; }
+    .fill span:nth-child(2) { transition-delay: 32ms; }
+    .fill span:nth-child(3) { transition-delay: 64ms; }
+    .fill span:nth-child(4) { transition-delay: 96ms; }
+    .fill span:nth-child(5) { transition-delay: 128ms; }
+    .fill span:nth-child(6) { transition-delay: 160ms; }
+    .fill span:nth-child(7) { transition-delay: 192ms; }
+    .fill span:nth-child(8) { transition-delay: 224ms; }
+    .fill span:nth-child(9) { transition-delay: 256ms; }
+    .fill span:nth-child(10) { transition-delay: 288ms; }
+    .fill span:nth-child(11) { transition-delay: 320ms; }
+    .fill span:nth-child(12) { transition-delay: 352ms; }
+  }
+</style>

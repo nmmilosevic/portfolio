@@ -1,0 +1,84 @@
+/* Page transition: the new page rises through the 12 grid columns, over the old page.
+   Native View Transitions API, no overlay element. Each column has its own animated mask. */
+
+@property --vt-1 { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+@property --vt-2 { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+@property --vt-3 { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+@property --vt-4 { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+@property --vt-5 { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+@property --vt-6 { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+@property --vt-7 { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+@property --vt-8 { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+@property --vt-9 { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+@property --vt-10 { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+@property --vt-11 { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+@property --vt-12 { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+
+@keyframes vt-1 { to { --vt-1: 100%; } }
+@keyframes vt-2 { to { --vt-2: 100%; } }
+@keyframes vt-3 { to { --vt-3: 100%; } }
+@keyframes vt-4 { to { --vt-4: 100%; } }
+@keyframes vt-5 { to { --vt-5: 100%; } }
+@keyframes vt-6 { to { --vt-6: 100%; } }
+@keyframes vt-7 { to { --vt-7: 100%; } }
+@keyframes vt-8 { to { --vt-8: 100%; } }
+@keyframes vt-9 { to { --vt-9: 100%; } }
+@keyframes vt-10 { to { --vt-10: 100%; } }
+@keyframes vt-11 { to { --vt-11: 100%; } }
+@keyframes vt-12 { to { --vt-12: 100%; } }
+
+@keyframes vt-old-lift { to { translate: 0 -8vh; filter: brightness(0.82); } }
+@keyframes vt-old-drop { to { translate: 0 8vh; filter: brightness(0.82); } }
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-group(root) { animation: none; }
+  ::view-transition-image-pair(root) { isolation: auto; }
+
+  ::view-transition-old(root) {
+    animation: vt-old-lift var(--duration-page) var(--ease-in-out) both;
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-new(root) {
+    --edge: 100%;
+    mix-blend-mode: normal;
+    opacity: 1;
+    animation-name: vt-1, vt-2, vt-3, vt-4, vt-5, vt-6, vt-7, vt-8, vt-9, vt-10, vt-11, vt-12;
+    animation-duration: var(--duration-page);
+    animation-timing-function: var(--ease-in-out);
+    animation-fill-mode: both;
+    animation-delay: 0ms, 32ms, 64ms, 96ms, 128ms, 160ms, 192ms, 224ms, 256ms, 288ms, 320ms, 352ms;
+    -webkit-mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0), linear-gradient(#000 0 0), linear-gradient(#000 0 0), linear-gradient(#000 0 0), linear-gradient(#000 0 0), linear-gradient(#000 0 0), linear-gradient(#000 0 0), linear-gradient(#000 0 0), linear-gradient(#000 0 0), linear-gradient(#000 0 0), linear-gradient(#000 0 0);
+    mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0), linear-gradient(#000 0 0), linear-gradient(#000 0 0), linear-gradient(#000 0 0), linear-gradient(#000 0 0), linear-gradient(#000 0 0), linear-gradient(#000 0 0), linear-gradient(#000 0 0), linear-gradient(#000 0 0), linear-gradient(#000 0 0), linear-gradient(#000 0 0);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    mask-position:
+      calc(100% * 0 / 11) var(--edge), calc(100% * 1 / 11) var(--edge), calc(100% * 2 / 11) var(--edge), calc(100% * 3 / 11) var(--edge),
+      calc(100% * 4 / 11) var(--edge), calc(100% * 5 / 11) var(--edge), calc(100% * 6 / 11) var(--edge), calc(100% * 7 / 11) var(--edge),
+      calc(100% * 8 / 11) var(--edge), calc(100% * 9 / 11) var(--edge), calc(100% * 10 / 11) var(--edge), calc(100% * 11 / 11) var(--edge);
+    -webkit-mask-size:
+      8.4% var(--vt-1), 8.4% var(--vt-2), 8.4% var(--vt-3), 8.4% var(--vt-4), 8.4% var(--vt-5), 8.4% var(--vt-6),
+      8.4% var(--vt-7), 8.4% var(--vt-8), 8.4% var(--vt-9), 8.4% var(--vt-10), 8.4% var(--vt-11), 8.4% var(--vt-12);
+    mask-size:
+      8.4% var(--vt-1), 8.4% var(--vt-2), 8.4% var(--vt-3), 8.4% var(--vt-4), 8.4% var(--vt-5), 8.4% var(--vt-6),
+      8.4% var(--vt-7), 8.4% var(--vt-8), 8.4% var(--vt-9), 8.4% var(--vt-10), 8.4% var(--vt-11), 8.4% var(--vt-12);
+  }
+
+  /* Going back: columns come down from the top, old page drops. */
+  [data-astro-transition='back']::view-transition-new(root) { --edge: 0%; }
+  [data-astro-transition='back']::view-transition-old(root) { animation-name: vt-old-drop; }
+
+  /* Same-page layout changes (grid and list): only the elements move, no column wipe. */
+  :root[data-vt='morph']::view-transition-old(root) { animation: none; opacity: 0; }
+  :root[data-vt='morph']::view-transition-new(root) { animation: none; opacity: 1; -webkit-mask-image: none; mask-image: none; }
+
+  /* The project image travels from its card to the top of the project page. */
+  ::view-transition-group(*) {
+    animation-duration: calc(var(--duration-page) + 240ms);
+    animation-timing-function: var(--ease-in-out);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation-duration: 1ms !important; }
+}
