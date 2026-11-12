@@ -101,7 +101,7 @@ src/
 
 ## Fonts
 
-Hubot Sans, self-hosted, SIL Open Font License. Its zero is slashed, which reads badly in dates and in "360Learning", so `src/styles/fonts.css` swaps that single glyph for the zero of its sister typeface, Mona Sans (1 KB, also OFL).
+Host Grotesk, self-hosted through `@fontsource-variable/host-grotesk`, SIL Open Font License.
 
 ## Deploying
 

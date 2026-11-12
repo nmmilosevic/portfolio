@@ -63,7 +63,8 @@
     display: grid;
     grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
     column-gap: var(--layout-gutter);
-    padding-inline: var(--layout-margin);
+    /* Past --layout-max the content stops growing and the margins take the extra room. */
+    padding-inline: max(var(--layout-margin), (100% - var(--layout-max)) / 2);
   }
   .section { padding-block: var(--space-section); }
   .full { grid-column: 1 / -1; }

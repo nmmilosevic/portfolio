@@ -1,6 +1,6 @@
 // Entry point. Runs once, then re-inits page modules after each navigation.
 import { $$, durationMs, onScrollFrame, prefersReducedMotion, type Cleanup } from './core';
-import { initReveals, openBlinds } from './reveal';
+import { initReveals, revealImage } from './reveal';
 import { initWords } from './scrollfx';
 import { initGridGlow, initPreviews, initProximity } from './pointer';
 
@@ -8,18 +8,6 @@ const root = document.documentElement;
 let gridOn = false;
 let cleanups: Cleanup[] = [];
 let navigated = false;
-
-/* Native View Transition for layout changes on the same page: elements morph, no column wipe. */
-function transition(update: () => void) {
-  if (!document.startViewTransition || prefersReducedMotion()) return update();
-  root.dataset.vt = 'morph';
-  const vt = document.startViewTransition(update);
-  // A skipped transition (hidden tab, for example) still applies the update, so these rejections are harmless.
-  vt.ready.catch(() => {});
-  vt.finished.catch(() => {}).finally(() => {
-    delete root.dataset.vt;
-  });
-}
 
 /* Controls in the persistent chrome use delegation, so they survive page swaps. */
 function setGrid(on: boolean) {
@@ -91,25 +79,6 @@ async function runIntro() {
   window.setTimeout(() => root.classList.remove('has-intro'), durationMs('page') + 500);
 }
 
-/* Black sections flip the whole page once they reach the middle of the screen. */
-let flipTimer = 0;
-function initSurfaces(): Cleanup {
-  const triggers = $$('[data-surface-trigger]');
-  const active = new Set<Element>();
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => (e.isIntersecting ? active.add(e.target) : active.delete(e.target)));
-    const next = active.size > 0;
-    if (next === (root.dataset.surface === 'inverse')) return;
-    root.classList.add('is-flipping');
-    window.clearTimeout(flipTimer);
-    flipTimer = window.setTimeout(() => root.classList.remove('is-flipping'), durationMs('surface') + 100);
-    if (next) root.dataset.surface = 'inverse';
-    else delete root.dataset.surface;
-  }, { rootMargin: '-50% 0px -50% 0px' });
-  triggers.forEach((t) => io.observe(t));
-  return () => io.disconnect();
-}
-
 /* Mobile has no hover, so the footer call to action fills with colour once it is on screen.
    Width counts too: some phones and narrow windows still report a fine pointer. */
 function initTouchCta(): Cleanup {
@@ -151,33 +120,6 @@ function initVideos(): Cleanup {
   return () => io.disconnect();
 }
 
-/* Home page: switch work between grid and list, with a native morph. */
-function initViewSwitch(): Cleanup {
-  const list = document.querySelector<HTMLElement>('[data-work]');
-  const buttons = $$<HTMLButtonElement>('[data-view]');
-  if (!list || !buttons.length) return () => {};
-  const items = $$('[data-work-item]', list);
-  const onClick = (e: Event) => {
-    const button = (e.currentTarget as HTMLButtonElement);
-    const view = button.dataset.view!;
-    if (list.dataset.layout === view) return;
-    items.forEach((item, i) => (item.style.viewTransitionName = `work-item-${i}`));
-    list.classList.add('is-switching');
-    transition(() => {
-      list.dataset.layout = view;
-      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
-      $$('.reveal', list).forEach((r) => r.classList.add('is-in', 'is-done'));
-      try { localStorage.setItem('work-view', view); } catch {}
-    });
-    window.setTimeout(() => {
-      items.forEach((item) => (item.style.viewTransitionName = ''));
-      list.classList.remove('is-switching');
-    }, durationMs('page') + 300);
-  };
-  buttons.forEach((b) => b.addEventListener('click', onClick));
-  return () => buttons.forEach((b) => b.removeEventListener('click', onClick));
-}
-
 /* /system page: accent hue slider and motion replays. */
 function initSystemPage(): Cleanup {
   const slider = document.querySelector<HTMLInputElement>('[data-hue]');
@@ -213,14 +155,14 @@ function initSystemPage(): Cleanup {
     void host.offsetWidth;
     host.classList.remove('motion-reset');
     requestAnimationFrame(() => requestAnimationFrame(() => {
-      targets.forEach((el) => (el.classList.contains('reveal') ? openBlinds(el) : el.classList.add('is-in')));
+      targets.forEach((el) => (el.classList.contains('reveal') ? revealImage(el) : el.classList.add('is-in')));
     }));
   };
   replays.forEach((b) => b.addEventListener('click', onReplay));
   return () => replays.forEach((b) => b.removeEventListener('click', onReplay));
 }
 
-/* Only one image morphs per navigation: the card you clicked, or the project cover on the way back home. */
+/* Only the card you clicked morphs, into the project cover. Going back home, nothing flies across the page. */
 let morphName: string | null = null;
 const setMorph = (el: HTMLElement | null | undefined, name: string) => {
   if (!el) return false;
@@ -229,11 +171,9 @@ const setMorph = (el: HTMLElement | null | undefined, name: string) => {
 };
 
 document.addEventListener('astro:before-preparation', (event) => {
-  const e = event as Event & { sourceElement?: Element; to: URL };
+  const e = event as Event & { sourceElement?: Element };
   morphName = null;
-  const fromCard = e.sourceElement?.querySelector<HTMLElement>('[data-morph]');
-  const cover = document.querySelector<HTMLElement>('[data-cover][data-morph]');
-  const source = fromCard ?? (e.to.pathname === '/' ? cover : null);
+  const source = e.sourceElement?.querySelector<HTMLElement>('[data-morph]');
   if (source && source.offsetWidth > 0) {
     morphName = source.dataset.morph!;
     setMorph(source, morphName);
@@ -245,8 +185,7 @@ document.addEventListener('astro:after-swap', () => {
   // A project cover is in place as soon as it arrives from a link, so it must not reveal again.
   $$('[data-cover]').forEach((el) => el.classList.add('is-in', 'is-done'));
   if (morphName) {
-    const target = document.querySelector<HTMLElement>(`[data-cover][data-morph="${morphName}"]`)
-      ?? document.querySelector<HTMLElement>(`[data-work-item] [data-morph="${morphName}"]`);
+    const target = document.querySelector<HTMLElement>(`[data-cover][data-morph="${morphName}"]`);
     if (target) {
       target.classList.add('is-in', 'is-done');
       setMorph(target, morphName);
@@ -254,18 +193,7 @@ document.addEventListener('astro:after-swap', () => {
     }
   }
   setGrid(gridOn);
-  // Restore the saved work layout before the new page is captured.
-  try {
-    const view = localStorage.getItem('work-view');
-    const list = document.querySelector<HTMLElement>('[data-work]');
-    if (view && list) applyWorkLayout(list, view);
-  } catch {}
 });
-
-function applyWorkLayout(list: HTMLElement, view: string) {
-  list.dataset.layout = view;
-  $$<HTMLButtonElement>('[data-view]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.view === view)));
-}
 
 document.addEventListener('astro:before-swap', () => {
   cleanups.forEach((fn) => fn());
@@ -279,15 +207,7 @@ document.addEventListener('astro:page-load', async () => {
   lastY = window.scrollY;
   document.querySelector('[data-header]')?.classList.remove('is-hidden');
 
-  if (isFirst) {
-    try {
-      const view = localStorage.getItem('work-view');
-      const list = document.querySelector<HTMLElement>('[data-work]');
-      if (view && list) applyWorkLayout(list, view);
-    } catch {}
-  }
-
-  cleanups.push(initSurfaces(), initTouchCta(), initClock(), initVideos(), initViewSwitch(), initSystemPage(), initPreviews());
+  cleanups.push(initTouchCta(), initClock(), initVideos(), initSystemPage(), initPreviews());
 
   await document.fonts.ready;
   if (isFirst) await runIntro();

@@ -11,7 +11,7 @@ role: Freelance senior product designer
 brand: { onGrey: '#3c29cc', onBlack: '#6366f1' }
 cover: ../../assets/projects/vibe/03.png
 coverAlt: Vibe campaign analytics with impressions, spend and a performance line chart
-place: { start: 6, span: 7 }
+place: { start: 1, span: 6 }
 owned:
   - Campaign creation and tracking
   - Campaign views and analytics
@@ -33,7 +33,7 @@ chapters:
   - title: Campaign views and analytics
     text:
       - Once the creation flow was stable, we moved to management views and analytics. People needed to review performance across several campaigns and act on it without switching context.
-      - I designed table views with filters and custom sorting, and a new analytics dashboard built around clarity and comparison. Data should help you decide, not overwhelm you.
+      - I designed table views with filters and custom sorting, and a new analytics dashboard built around comparison, so the data helps people decide.
     media:
       - { src: ../../assets/projects/vibe/03.png, alt: Campaign analytics with impressions, spend and a performance line chart }
       - { src: ../../assets/projects/vibe/04.png, alt: Table of channels with sortable performance columns }
@@ -46,4 +46,4 @@ chapters:
       - { src: ../../assets/projects/vibe/06.png, alt: Settings page with a list of invoices }
 ---
 
-Vibe is the Google Ads of TV. Any marketer can plan, buy and air TV ads on major channels in minutes. When I joined, there was already an MVP. My job was to bring fresh thinking, rework the key flows and build a solid base for growth.
+Vibe is the Google Ads of TV. Any marketer can plan, buy and air TV ads on major channels in minutes. When I joined, there was already an MVP. My job was to rework the key flows and build a solid base for growth.

@@ -1,8 +1,7 @@
 ---
 import { ClientRouter } from 'astro:transitions';
-import '@fontsource-variable/hubot-sans/standard.css';
-import fontUrl from '@fontsource-variable/hubot-sans/files/hubot-sans-latin-standard-normal.woff2?url';
-import '../styles/fonts.css';
+import '@fontsource-variable/host-grotesk/wght.css';
+import fontUrl from '@fontsource-variable/host-grotesk/files/host-grotesk-latin-wght-normal.woff2?url';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -24,7 +23,7 @@ const ogImage = new URL(image ?? '/share.png', Astro.site);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -35,7 +34,7 @@ const ogImage = new URL(image ?? '/share.png', Astro.site);
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preload" href={fontUrl} as="font" type="font/woff2" crossorigin />
-    <meta name="theme-color" content="#d9d9d9" />
+    <meta name="theme-color" content="#0a0a0a" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
@@ -57,8 +56,8 @@ const ogImage = new URL(image ?? '/share.png', Astro.site);
             hue = localStorage.getItem('accent-hue');
             localStorage.removeItem('theme');
           } catch {}
-          // Grey is the only theme. Black comes from sections flipping the surface.
-          root.dataset.theme = 'light';
+          // Black is the only theme, on every page and every section.
+          root.dataset.theme = 'dark';
           if (hue) root.style.setProperty('--color-accent-hue', hue);
           root.classList.add('js');
         };

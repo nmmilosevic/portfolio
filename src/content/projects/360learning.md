@@ -11,7 +11,7 @@ role: Product designer, Enterprise squad
 brand: { onGrey: '#2467f4', onBlack: '#3c77f5' }
 cover: ../../assets/projects/360learning/01.png
 coverAlt: 360Learning home screen with team members and a table of ongoing opportunities
-place: { start: 1, span: 7 }
+place: { start: 7, span: 6 }
 owned:
   - The enterprise suite
   - Learning Needs, from first request to course creation
@@ -33,7 +33,7 @@ chapters:
   - title: Course structure and draft management
     text:
       - Once a need is validated, the team starts building the course. This part is about planning, organising and assigning work before creation really begins.
-      - We designed a clean interface to manage drafts, define structure and make it clear who owns each step. It kept teams aligned right from the start.
+      - We designed a clean interface to manage drafts and define the structure. It also shows who owns each step, so everyone knows that before creation begins.
     media:
       - { src: ../../assets/projects/360learning/03.png, alt: Course planning page with description and modules }
       - { src: ../../assets/projects/360learning/04.png, alt: Project plan listing modules, owners and status }

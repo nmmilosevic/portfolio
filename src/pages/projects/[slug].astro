@@ -1,18 +1,14 @@
 ---
 import { getCollection, render } from 'astro:content';
-import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Shot from '../../components/Shot.astro';
 
 export async function getStaticPaths() {
   const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
-  return projects.map((project, i) => ({
-    params: { slug: project.id },
-    props: { project, next: projects[(i + 1) % projects.length] },
-  }));
+  return projects.map((project) => ({ params: { slug: project.id }, props: { project } }));
 }
 
-const { project, next } = Astro.props;
+const { project } = Astro.props;
 const p = project.data;
 const { Content } = await render(project);
 
@@ -31,20 +27,19 @@ const facts = [
       <p class="summary t-display-s" data-split>{p.summary}</p>
     </header>
 
-    <dl class="facts grid t-small">
-      {
-        facts.map((f, i) => (
-          <div class="fact" data-fade style={`--fade-delay:${i * 60}ms`}>
-            <dt class="muted">{f.label}</dt>
-            <dd>{f.value}</dd>
-          </div>
-        ))
-      }
-    </dl>
-
-    <div class="cover grid">
-      <div class="full">
-        <Shot src={p.cover} alt={p.coverAlt} eager cover morph={`cover-${project.id}`} />
+    <div class="overview grid">
+      <dl class="facts t-small">
+        {
+          facts.map((f, i) => (
+            <div class="fact" data-fade style={`--fade-delay:${i * 60}ms`}>
+              <dt class="muted">{f.label}</dt>
+              <dd>{f.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+      <div class="cover">
+        <Shot src={p.cover} alt={p.coverAlt} sizes="(max-width: 900px) 100vw, 66vw" eager cover morph={`cover-${project.id}`} />
       </div>
     </div>
 
@@ -97,26 +92,20 @@ const facts = [
         </section>
       ))
     }
-
-    <a class="next grid brand-trigger" href={`/projects/${next.id}`} style={`--brand-on-grey:${next.data.brand.onGrey};--brand-on-black:${next.data.brand.onBlack}`}>
-      <span class="next-label t-small muted">Next project</span>
-      <span class="next-name brand-name t-display-m">{next.data.title}</span>
-      <span class="next-summary t-small muted">{next.data.summary}</span>
-      <span class="next-shot" data-morph={`cover-${next.id}`}>
-        <Image src={next.data.cover} alt="" widths={[640, 960, 1440]} sizes="(max-width: 900px) 100vw, 50vw" format="webp" quality={80} loading="lazy" />
-      </span>
-    </a>
   </article>
 </Layout>
 
 <style>
-  .intro { padding-top: calc(var(--layout-header) + var(--space-5)); row-gap: var(--space-5); }
+  .intro { padding-top: calc(var(--layout-header) + var(--space-8)); row-gap: var(--space-5); }
   .name { grid-column: 1 / -1; }
-  .summary { grid-column: 1 / span 10; max-width: none; }
+  .summary { grid-column: 1 / span 8; max-width: none; }
 
-  .facts { padding-block: var(--space-7) var(--space-5); row-gap: var(--space-4); }
-  .fact { grid-column: span 3; border-top: 1px solid var(--line); padding-top: var(--space-2); }
+  /* Facts on the left, screens on the right: the same two columns as the chapters below. */
+  .overview { padding-top: var(--space-8); row-gap: var(--space-6); align-items: start; }
+  .facts { grid-column: 1 / span 3; display: flex; flex-direction: column; gap: var(--space-4); }
+  .fact { border-top: 1px solid var(--line); padding-top: var(--space-2); }
   .fact dt { margin-bottom: var(--space-1); }
+  .cover { grid-column: 5 / -1; }
 
   .context { row-gap: var(--space-7); }
   .lead { grid-column: 1 / span 8; }
@@ -130,6 +119,8 @@ const facts = [
   .result dt { margin-top: var(--space-1); }
 
   .chapter { row-gap: var(--space-5); padding-bottom: var(--space-section); }
+  /* The footer brings its own space above. */
+  .chapter:last-of-type { padding-bottom: 0; }
   .chapter-text {
     grid-column: 1 / span 4;
     position: sticky;
@@ -140,9 +131,9 @@ const facts = [
     gap: var(--space-4);
     padding-right: var(--space-5);
   }
-  .chapter-media { grid-column: 5 / -1; display: flex; flex-direction: column; gap: var(--layout-gutter); }
+  .chapter-media { grid-column: 5 / -1; display: flex; flex-direction: column; gap: var(--space-5); }
   /* The recording is 2592 x 1440 with a dark 2px line baked into its edges. The frame shows it minus 3px per side. */
-  .video-frame { position: relative; aspect-ratio: 2586 / 1434; background: var(--bg-raised); overflow: clip; }
+  .video-frame { position: relative; aspect-ratio: 2586 / 1434; background: var(--bg-raised); overflow: clip; border-radius: var(--radius-media); }
   .video-frame video {
     position: absolute;
     top: calc(-100% * 3 / 1434);
@@ -153,25 +144,9 @@ const facts = [
     object-fit: fill;
   }
 
-  .next {
-    row-gap: var(--space-3);
-    padding-block: var(--space-6);
-    border-top: 1px solid var(--line);
-    margin-inline: 0;
-    align-items: start;
-  }
-  .next-label { grid-column: 1 / -1; }
-  .next-name { grid-column: 1 / span 6; }
-  .next-summary { grid-column: 1 / span 4; }
-  .next-shot { grid-column: 7 / -1; grid-row: 2 / span 2; display: block; aspect-ratio: 16 / 10; overflow: clip; }
-  .next-shot :global(img) { width: 100%; height: 100%; object-fit: cover; }
-
   @media (max-width: 900px) {
-    .summary, .lead, .owned, .team, .results, .chapter-text, .chapter-media, .next-name, .next-summary, .next-shot { grid-column: 1 / -1; grid-row: auto; }
+    .summary, .facts, .cover, .lead, .owned, .team, .results, .chapter-text, .chapter-media { grid-column: 1 / -1; }
     .chapter-text { position: static; padding-right: 0; }
-    .fact { grid-column: span 3; }
-  }
-  @media (max-width: 560px) {
-    .fact { grid-column: span 2; }
+    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4) var(--layout-gutter); }
   }
 </style>

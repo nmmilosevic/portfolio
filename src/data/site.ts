@@ -28,7 +28,7 @@ export const stats = [
 export const principles = [
   {
     title: 'I own the outcome',
-    text: "When I take on a product area, it's mine from end to end: the structure, the flows, the details, and the questions nobody else has time for. I don't hand over a file and disappear.",
+    text: "When I take on a product area, it's mine from end to end: the structure, the flows, the details, and the questions nobody else has time for. I stay with it until it ships.",
   },
   {
     title: 'I design with the people who build',
@@ -36,11 +36,11 @@ export const principles = [
   },
   {
     title: 'I leave a system behind',
-    text: "A design system is how good decisions survive when I'm not in the room. Every project on this site has one, because the team has to keep shipping after I leave.",
+    text: "The team has to keep shipping after I leave, so every project on this site has a design system. It keeps our decisions usable when I'm not in the room.",
   },
   {
     title: 'I work remotely, and stay close',
-    text: "I've worked from Spain with teams in Paris, the US and elsewhere for years. Clear files, written decisions, and being easy to reach make the distance a non-issue.",
+    text: "I've worked from Spain with teams in Paris, the US and elsewhere for years. Clear files, written decisions and being easy to reach make the distance easy to forget.",
   },
 ];
 

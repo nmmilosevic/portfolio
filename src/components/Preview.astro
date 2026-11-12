@@ -10,12 +10,13 @@
     left: 0;
     z-index: var(--z-header);
     pointer-events: none;
-    width: clamp(16rem, 28vw, 30rem);
+    width: clamp(14rem, 22vw, 22rem);
     margin: -9vw 0 0 2rem;
   }
   .preview-clip {
     aspect-ratio: 16 / 10;
     overflow: clip;
+    border-radius: var(--radius-media);
     clip-path: inset(0 100% 0 0);
     transition: clip-path var(--duration-base) var(--ease-out);
   }

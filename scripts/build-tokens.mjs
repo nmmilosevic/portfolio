@@ -65,13 +65,13 @@ ${registered.join('\n')}
 ${base.join('\n')}
 }
 
-:root:not([data-theme]),
 :root[data-theme='light']:not([data-surface='inverse']),
 :root[data-theme='dark'][data-surface='inverse'] {
   color-scheme: light;
 ${mode(tokens.theme.light)}
 }
 
+:root:not([data-theme]),
 :root[data-theme='dark']:not([data-surface='inverse']),
 :root[data-theme='light'][data-surface='inverse'] {
   color-scheme: dark;

@@ -11,7 +11,7 @@ role: Consulting product designer, through Monsieur Guiz
 brand: { onGrey: '#1e2aa5', onBlack: '#494df4' }
 cover: ../../assets/projects/axa/01.png
 coverAlt: AXA insurance homepage with a family in front of their house and product shortcuts
-place: { start: 8, span: 5 }
+place: { start: 1, span: 6 }
 owned:
   - New features for the AXA Insurance website
   - The website presenting the new AXA Bank app
@@ -30,7 +30,7 @@ chapters:
   - title: Design system
     text:
       - I contributed to the shared AXA Design System by building components and defining spacing, constraints and documentation for the development teams.
-      - The priority was clarity and adaptability. Each component had to work the same way across different teams and contexts, without becoming rigid.
+      - Each component had to work the same way across different teams and contexts, and still leave room to adapt.
     media:
       - { src: ../../assets/projects/axa/03.png, alt: Angled view of design system components and form fields }
       - { src: ../../assets/projects/axa/04.png, alt: Component specifications with spacing and constraint annotations }

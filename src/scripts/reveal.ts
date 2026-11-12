@@ -57,36 +57,10 @@ function split(el: HTMLElement) {
   el.classList.add('is-split');
 }
 
-// Where each strip starts, in % of the image: one strip per grid column the image covers at this screen size.
-function stripEdges(el: HTMLElement) {
-  const { left, width } = el.getBoundingClientRect();
-  const inner = $$('[data-grid-overlay] .rest > span')
-    .map((column) => column.getBoundingClientRect())
-    .filter((column) => column.width > 0 && column.left > left + 2 && column.left < left + width - 2)
-    .map((column) => ((column.left - left) / width) * 100);
-  return [0, ...inner, 100];
-}
-
-// Strips in the page colour cover the image, then shrink along the columns. Only transforms animate, so nothing repaints.
-export function openBlinds(el: HTMLElement) {
-  el.querySelector(':scope > .blinds')?.remove();
-  const edges = stripEdges(el);
-  const blinds = document.createElement('div');
-  blinds.className = 'blinds';
-  blinds.setAttribute('aria-hidden', 'true');
-  for (let i = 0; i < edges.length - 1; i++) {
-    const strip = document.createElement('span');
-    strip.style.left = `${edges[i]}%`;
-    strip.style.width = `calc(${edges[i + 1] - edges[i]}% + 1px)`;
-    blinds.append(strip);
-  }
-  el.append(blinds);
+// The image rises out of a clip, like the text lines, while the picture settles from a slight zoom. Timing lives in motion.css.
+export function revealImage(el: HTMLElement) {
   el.classList.add('is-in');
-  requestAnimationFrame(() => requestAnimationFrame(() => blinds.classList.add('is-open')));
-  window.setTimeout(() => {
-    blinds.remove();
-    el.classList.add('is-done');
-  }, durationMs('slow') + 80);
+  window.setTimeout(() => el.classList.add('is-done'), durationMs('slow') * 1.6 + 80);
 }
 
 export function initReveals(delay = 0): Cleanup {
@@ -108,7 +82,7 @@ export function initReveals(delay = 0): Cleanup {
   counters.forEach((el) => (el.textContent = '0' + (el.dataset.suffix ?? '')));
 
   const show = (el: HTMLElement) => {
-    if (el.classList.contains('reveal')) return openBlinds(el);
+    if (el.classList.contains('reveal')) return revealImage(el);
     el.classList.add('is-in');
     if (el.dataset.count) animateCount(el);
   };
@@ -123,7 +97,20 @@ export function initReveals(delay = 0): Cleanup {
     },
     { rootMargin: '0px 0px -8% 0px', threshold: 0.01 },
   );
-  [...splits, ...fades, ...images, ...counters].forEach((el) => io.observe(el));
+  [...splits, ...fades, ...counters].forEach((el) => io.observe(el));
+
+  // Images wait until a good part of them is on screen, so the reveal plays where you can see it.
+  const imageIo = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        show(entry.target as HTMLElement);
+        imageIo.unobserve(entry.target);
+      }
+    },
+    { rootMargin: '0px 0px -12% 0px', threshold: 0.2 },
+  );
+  images.forEach((el) => imageIo.observe(el));
 
   // Line breaks depend on width, so split again if the width changes.
   let width = window.innerWidth;
@@ -136,6 +123,7 @@ export function initReveals(delay = 0): Cleanup {
 
   return () => {
     io.disconnect();
+    imageIo.disconnect();
     window.removeEventListener('resize', onResize);
   };
 }
