@@ -57,7 +57,7 @@ const rows = await Promise.all(
       {
         rows.map((row) => (
           <li>
-            <a class="row grid brand-trigger" href={`/projects/${row.id}`} data-preview-src={row.preview} style={`--preview-on:1;--brand-on-grey:${row.data.brand.onGrey};--brand-on-black:${row.data.brand.onBlack}`}>
+            <a class="row grid brand-trigger" href={`/projects/${row.id}/`} data-preview-src={row.preview} style={`--preview-on:1;--brand-on-grey:${row.data.brand.onGrey};--brand-on-black:${row.data.brand.onBlack}`}>
               <span class="row-name brand-name t-title">{row.data.title}</span>
               <span class="row-role t-small muted">{row.data.role}</span>
               <span class="row-period t-small muted tnum">{row.data.period}</span>
