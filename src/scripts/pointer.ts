@@ -45,7 +45,7 @@ export function initProximity(): Cleanup {
 
   type Char = { el: HTMLElement; x: number; y: number; wght: number };
   let chars: Char[] = [];
-  const REST = 480, PEAK = 760, RADIUS = 260;
+  const REST = 500, PEAK = 760, RADIUS = 260;
 
   const measure = () => {
     chars = $$('.char', host).map((el) => {
