@@ -4,6 +4,7 @@ import { about } from "@/lib/content";
 import ExperienceCards from "@/components/ExperienceCards";
 import DoCards, { HowCards } from "@/components/DoCards";
 import StatCards from "@/components/StatCards";
+import Button from "@/components/Button";
 
 export const metadata: Metadata = { title: "About", description: about.metaDescription };
 
@@ -21,6 +22,11 @@ export default function About() {
               {t}
             </p>
           ))}
+          <div className="mt-8">
+            <Button href="/nicolas-milosevic-resume.pdf" variant="secondary">
+              Download resume
+            </Button>
+          </div>
         </div>
       </section>
 

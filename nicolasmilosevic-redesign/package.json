@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "resume": "\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless=new --no-pdf-header-footer --virtual-time-budget=3000 --print-to-pdf=public/nicolas-milosevic-resume.pdf \"file://$PWD/resume/resume.html\""
   },
   "dependencies": {
     "gsap": "^3.15.1",

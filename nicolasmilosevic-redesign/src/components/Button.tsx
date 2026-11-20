@@ -10,7 +10,8 @@ type Props = {
 };
 
 export default function Button({ href, variant = "secondary", children, className = "" }: Props) {
-  const external = href.startsWith("http");
+  // files like the resume PDF open in a new tab, outside the Next router
+  const external = href.startsWith("http") || href.endsWith(".pdf");
   const cls = `btn btn-${variant} ${variant === "secondary" ? "glass" : ""} ${className}`;
   const inner = (
     <>
