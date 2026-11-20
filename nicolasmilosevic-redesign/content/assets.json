@@ -1,0 +1,231 @@
+{
+  "somfy": [
+    {
+      "src": "/media/somfy/01.webp",
+      "alt": "Somfy Pro dashboard showing yearly invoiced revenue as a line chart",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "desktop screen"
+    },
+    {
+      "src": "/media/somfy/02.webp",
+      "alt": "Order detail page with status and the list of ordered items",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "desktop screen"
+    },
+    {
+      "src": "/media/somfy/03.webp",
+      "alt": "Rolling shutter catalogue with filters and a comparison tray at the bottom",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "desktop screen"
+    },
+    {
+      "src": "/media/somfy/04.webp",
+      "alt": "Three products compared side by side across technical measurements",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "desktop screen"
+    },
+    {
+      "src": "/media/somfy/05.webp",
+      "alt": "Installer homepage with a personal welcome",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "desktop screen"
+    },
+    {
+      "src": "/media/somfy/06.webp",
+      "alt": "Product page with a reference table of variants and a price panel",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "desktop screen"
+    }
+  ],
+  "zestia": [
+    {
+      "src": "/media/zestia/01.webp",
+      "alt": "Zestia dashboard with commission projections, calendar and team activity",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "desktop screen"
+    },
+    {
+      "src": "/media/zestia/02.webp",
+      "alt": "Global dashboard with brokerage status charts and revenue cards",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "desktop screen"
+    },
+    {
+      "src": "/media/zestia/03.webp",
+      "alt": "Blurred overview of the flows with the note that more than 80 screens were designed",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "process artifact"
+    }
+  ],
+  "vibe": [
+    {
+      "src": "/media/vibe/03.webp",
+      "alt": "Vibe campaign analytics with impressions, spend and a performance line chart",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "desktop screen"
+    },
+    {
+      "src": "/media/vibe/01.webp",
+      "alt": "Campaign creation step with strategy",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "desktop screen"
+    },
+    {
+      "src": "/media/vibe/02.webp",
+      "alt": "Campaign creation step with audience",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "desktop screen"
+    },
+    {
+      "src": "/media/vibe/04.webp",
+      "alt": "Table of channels with sortable performance columns",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "desktop screen"
+    },
+    {
+      "src": "/media/vibe/05.webp",
+      "alt": "Settings page with a list of members and their roles",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "desktop screen"
+    },
+    {
+      "src": "/media/vibe/06.webp",
+      "alt": "Settings page with a list of invoices",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "desktop screen"
+    }
+  ],
+  "360learning": [
+    {
+      "src": "/media/360learning/01.webp",
+      "alt": "360Learning home screen with team members and a table of ongoing opportunities",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "desktop screen"
+    },
+    {
+      "src": "/media/360learning/02.webp",
+      "alt": "Feed of learning needs with filters and apply buttons",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "desktop screen"
+    },
+    {
+      "src": "/media/360learning/03.webp",
+      "alt": "Course planning page with description and modules",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "desktop screen"
+    },
+    {
+      "src": "/media/360learning/04.webp",
+      "alt": "Project plan listing modules",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "desktop screen"
+    },
+    {
+      "src": "/media/360learning/05.webp",
+      "alt": "Collection of components",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "process artifact"
+    },
+    {
+      "src": "/media/360learning/06.webp",
+      "alt": "Collection of form controls",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "process artifact"
+    }
+  ],
+  "axa": [
+    {
+      "src": "/media/axa/01.webp",
+      "alt": "AXA insurance homepage with a family in front of their house and product shortcuts",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "desktop screen"
+    },
+    {
+      "src": "/media/axa/02.webp",
+      "alt": "AXA Bank page presenting the mobile app on several tilted phones",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "desktop screen (existing 3D mockup)"
+    },
+    {
+      "src": "/media/axa/03.webp",
+      "alt": "Angled view of design system components and form fields",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "process artifact"
+    },
+    {
+      "src": "/media/axa/04.webp",
+      "alt": "Component specifications with spacing and constraint annotations",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "process artifact"
+    },
+    {
+      "src": "/media/axa/05.webp",
+      "alt": "Colourful illustrated characters on a blue background",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "illustration"
+    }
+  ],
+  "system": [
+    {
+      "src": "/media/axa/05.webp",
+      "alt": "Colourful illustrated characters on a blue background",
+      "width": 2880,
+      "height": 1800,
+      "ratio": "16:10",
+      "kind": "illustration"
+    }
+  ],
+  "about": []
+}

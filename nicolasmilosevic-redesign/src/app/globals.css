@@ -1,0 +1,728 @@
+@import "tailwindcss";
+
+/* Liquid dock preset — tokens */
+:root {
+  --base: #fbfbfd;
+  --ink: #1d1d1f;
+  --ink-2: #86868b;
+  --hair: rgba(0, 0, 0, 0.08);
+  --surface: #f7f7f9;
+  --line: rgba(0, 0, 0, 0.07);
+  --accent: #2623f9; /* Nicolas's own blue */
+
+  --glass-bg: rgba(255, 255, 255, 0.38);
+  --glass-bg-hover: rgba(255, 255, 255, 0.5);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.75), inset -1px -1px 0 rgba(255, 255, 255, 0.25),
+    0 8px 24px rgba(0, 0, 0, 0.12);
+  --glass-blur: blur(16px) saturate(200%);
+
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --t-press: 0.35s;
+  --t-hover: 0.3s;
+  --t-dock: 0.5s;
+  --t-page: 0.35s;
+
+  --edge: 12px;
+  --inset: clamp(20px, 6vw, 96px);
+  --r-card: 36px;
+  --r-tile: 24px;
+
+  --font: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+}
+
+@theme inline {
+  --color-base: var(--base);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-hair: var(--hair);
+  --color-surface: var(--surface);
+  --color-accent: var(--accent);
+  --font-sans: var(--font);
+}
+
+* {
+  box-sizing: border-box;
+}
+html {
+  background: var(--base);
+  color: var(--ink);
+  -webkit-text-size-adjust: 100%;
+}
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.53;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "tnum" 0;
+  background: var(--base);
+}
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 12px;
+}
+img {
+  display: block;
+}
+
+/* Type roles */
+.t-large {
+  font-size: clamp(40px, 4.4vw + 12px, 80px);
+  line-height: 1.04;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.t-title {
+  font-size: clamp(30px, 2vw + 18px, 48px);
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.t-headline {
+  font-size: 24px;
+  line-height: 1.4;
+  font-weight: 500;
+}
+.t-body {
+  font-size: 17px;
+  line-height: 1.53;
+}
+.t-caption {
+  font-size: 13px;
+  line-height: 1.38;
+  font-weight: 500;
+}
+.t-metric {
+  font-size: clamp(40px, 2.4vw + 22px, 56px);
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.measure {
+  max-width: 640px;
+}
+.measure-title {
+  max-width: 900px;
+}
+/* One container for everything: 1200px of content, centred */
+.inset,
+.edge {
+  width: 100%;
+  max-width: calc(1200px + 2 * 20px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Shapes */
+.card {
+  border-radius: var(--r-card);
+  corner-shape: squircle;
+  overflow: hidden;
+  position: relative;
+}
+.tile {
+  border-radius: var(--r-tile);
+  corner-shape: squircle;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Liquid glass — the navigation layer only */
+.glass {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass {
+    background: rgba(251, 251, 253, 0.95);
+  }
+  .glass-accent {
+    background: rgba(38, 35, 249, 0.95) !important;
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .glass {
+    background: rgba(251, 251, 253, 0.95);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .glass-accent {
+    background: rgba(38, 35, 249, 0.95) !important;
+  }
+}
+
+/* Buttons — one hover, three looks */
+.btn {
+  --btn-bg: var(--glass-bg);
+  --btn-bg-hover: var(--glass-bg-hover);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 24px;
+  border-radius: 999px;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  background: var(--btn-bg);
+  transition: background-color var(--t-hover) var(--ease), transform var(--t-press) var(--ease);
+}
+.btn:hover {
+  background: var(--btn-bg-hover);
+  transform: scale(0.95);
+}
+.btn:active {
+  transform: scale(0.9);
+  transition-duration: 0.12s;
+}
+.btn .chev {
+  transition: transform var(--t-hover) var(--ease);
+}
+.btn:hover .chev {
+  transform: translateX(2px);
+}
+/* a back chevron moves the other way */
+.btn:hover .chev:first-child {
+  transform: translateX(-2px);
+}
+.btn-primary {
+  --btn-bg: var(--accent);
+  --btn-bg-hover: color-mix(in srgb, var(--accent) 90%, #fff);
+  color: #fff;
+  border: 0;
+  /* the glow sits inside the edge: a light rim, a soft lit top and a deeper bottom */
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.14),
+    inset 0 0 14px rgba(255, 255, 255, 0.22),
+    inset 0 2px 1px rgba(255, 255, 255, 0.28),
+    inset 0 -6px 12px rgba(0, 0, 40, 0.22),
+    0 10px 24px -8px rgba(0, 0, 0, 0.28);
+}
+/* Primary button on a blue surface: dark ink pill, white text */
+.btn-on-accent {
+  --btn-bg: var(--ink);
+  --btn-bg-hover: color-mix(in srgb, var(--ink) 88%, #fff);
+  color: #fff;
+  /* same inner glow as the primary button, on the dark ink */
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    inset 0 0 14px rgba(255, 255, 255, 0.16),
+    inset 0 2px 1px rgba(255, 255, 255, 0.22),
+    inset 0 -6px 12px rgba(0, 0, 0, 0.35),
+    0 10px 24px -8px rgba(0, 0, 0, 0.4);
+}
+.btn-secondary {
+  --btn-bg: #fff;
+  --btn-bg-hover: #f7f7f9;
+  color: var(--ink);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  /* light version of the primary's inner glow */
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.06),
+    inset 0 2px 1px rgba(255, 255, 255, 1),
+    inset 0 0 14px rgba(255, 255, 255, 0.9),
+    inset 0 -6px 12px rgba(0, 0, 40, 0.06),
+    0 10px 24px -8px rgba(0, 0, 0, 0.18);
+}
+.btn-tertiary {
+  --btn-bg: transparent;
+  --btn-bg-hover: transparent;
+  height: 44px;
+  padding: 0;
+  color: var(--accent);
+  border: 0;
+  box-shadow: none;
+}
+.btn-tertiary:hover {
+  opacity: 0.8;
+}
+
+/* Icon buttons (carousel, back) */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--glass-bg);
+  cursor: pointer;
+  transition: background-color var(--t-hover) var(--ease), transform var(--t-press) var(--ease),
+    opacity var(--t-hover) var(--ease);
+}
+.icon-btn:hover {
+  background: var(--glass-bg-hover);
+  transform: scale(0.95);
+}
+.icon-btn:active {
+  transform: scale(0.9);
+  transition-duration: 0.12s;
+}
+.icon-btn[disabled] {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* Screens on product panels */
+.screen-pad {
+  position: absolute;
+  inset: 7%;
+}
+.screen-pad img {
+  object-fit: contain;
+}
+
+/* Snap carousel */
+.snap {
+  display: flex;
+  gap: var(--edge);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding: 0;
+  scroll-padding: 0;
+  overscroll-behavior-x: contain;
+}
+.snap::-webkit-scrollbar {
+  display: none;
+}
+.snap > * {
+  scroll-snap-align: start;
+  flex: none;
+}
+
+/* Reveal: fade in with a 32px rise (GSAP drives it; this is the resting state before JS) */
+.js [data-rise] {
+  opacity: 0;
+}
+
+/* Page transition: fades in under the dock */
+@keyframes page-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.page-in {
+  animation: page-in var(--t-page) var(--ease) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .icon-btn,
+  .btn .chev {
+    transition: background-color var(--t-hover) linear;
+  }
+  .btn:hover,
+  .btn:active,
+  .icon-btn:hover,
+  .icon-btn:active,
+  .dock-link:hover,
+  .dock-link:active {
+    transform: none;
+  }
+}
+
+/* Dock: morphs between full and compact with transform only */
+.dock {
+  transform-origin: 50% 0;
+  transition: transform var(--t-dock) var(--ease);
+}
+.dock[data-compact] {
+  transform: translateY(-4px) scale(0.86);
+}
+.dock-link {
+  transition: color var(--t-hover) var(--ease), background-color var(--t-hover) var(--ease), transform var(--t-press) var(--ease);
+}
+.dock-link:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(0.95);
+}
+.dock-link:active {
+  transform: scale(0.9);
+  transition-duration: 0.12s;
+}
+.dock-sheet:not([hidden]) {
+  animation: page-in var(--t-press) var(--ease) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dock {
+    transition: none;
+  }
+}
+
+.hero-screen {
+  position: absolute;
+  inset: 7%;
+}
+@media (max-width: 767px) {
+  .hero-screen {
+    inset: 10% 5% 42% 5%;
+  }
+}
+.dock[data-on-dark] .dock-link:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+.dock[data-on-dark] .dock-link[aria-current="page"] {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+}
+
+/* Content container: 1200px, centred */
+.wrap {
+  width: 100%;
+  max-width: calc(1200px + 2 * 20px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Glass plate over a dark product colour: same recipe, light text */
+.plate-dark,
+.plate-dark .text-ink {
+  color: #fff;
+}
+
+/* What I do — small line drawings */
+@keyframes ill-slide {
+  0%, 15% { transform: translate(0, 22px); opacity: 0; }
+  40%, 85% { transform: translate(0, 0); opacity: 1; }
+  100% { transform: translate(0, 0); opacity: 0; }
+}
+.ill-slide { animation: ill-slide 4s var(--ease) infinite; }
+@keyframes ill-hop {
+  0%, 20% { transform: translate(0, 0); }
+  25%, 45% { transform: translate(46px, 0); }
+  50%, 70% { transform: translate(46px, 42px); }
+  75%, 95% { transform: translate(0, 42px); }
+  100% { transform: translate(0, 0); }
+}
+.ill-hop { animation: ill-hop 6s var(--ease) infinite; opacity: 0.9; }
+@keyframes ill-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+.ill-blink { animation: ill-blink 1.1s steps(1) infinite; }
+@keyframes ill-scan {
+  0%, 15% { transform: translate(0, 0); }
+  45%, 60% { transform: translate(48px, -8px); }
+  90%, 100% { transform: translate(0, 0); }
+}
+.ill-scan { animation: ill-scan 5s var(--ease) infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ill-slide, .ill-hop, .ill-blink, .ill-scan { animation: none; }
+}
+
+/* Zoom: the screen opens large over the page */
+.zoom-trigger .card {
+  transition: transform var(--t-press) var(--ease);
+}
+.zoom-trigger:active .card {
+  transform: scale(0.98);
+}
+@keyframes lightbox-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes lightbox-img-in {
+  from { transform: scale(0.94); }
+  to { transform: none; }
+}
+.lightbox {
+  background: rgba(251, 251, 253, 0.96);
+  animation: lightbox-in var(--t-press) var(--ease) both;
+}
+.lightbox-img {
+  animation: lightbox-img-in 0.5s var(--ease) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lightbox-img { animation: none; }
+  .zoom-trigger:active .card { transform: none; }
+}
+
+/* How I work — line drawings */
+.ill-check { opacity: 0; animation: ill-check 4.8s var(--ease) infinite; }
+.ill-check-1 { animation-delay: 0.5s; }
+.ill-check-2 { animation-delay: 1s; }
+@keyframes ill-check {
+  0%, 8% { opacity: 0; transform: translateY(4px); }
+  18%, 80% { opacity: 1; transform: none; }
+  92%, 100% { opacity: 0; }
+}
+@keyframes ill-left { 0%, 15% { transform: translateX(-10px); } 50%, 65% { transform: translateX(4px); } 100% { transform: translateX(-10px); } }
+@keyframes ill-right { 0%, 15% { transform: translateX(10px); } 50%, 65% { transform: translateX(-4px); } 100% { transform: translateX(10px); } }
+.ill-left { animation: ill-left 5s var(--ease) infinite; }
+.ill-right { animation: ill-right 5s var(--ease) infinite; }
+@keyframes ill-lift { 0%, 20% { transform: translateY(0); } 50%, 70% { transform: translateY(-8px); } 100% { transform: translateY(0); } }
+.ill-lift { animation: ill-lift 4s var(--ease) infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .ill-check, .ill-left, .ill-right, .ill-lift { animation: none; opacity: 1; }
+}
+
+/* Numbers — line drawings */
+.ill-grow { transform-box: fill-box; transform-origin: 50% 100%; animation: ill-grow 4s var(--ease) infinite; }
+@keyframes ill-grow { 0% { transform: scaleY(0.2); } 30%, 85% { transform: scaleY(1); } 100% { transform: scaleY(0.2); } }
+.ill-pop { transform-box: fill-box; transform-origin: center; animation: ill-pop 3.2s var(--ease) infinite; }
+@keyframes ill-pop { 0%, 10% { transform: scale(0.4); opacity: 0.3; } 35%, 80% { transform: scale(1); opacity: 1; } 100% { transform: scale(0.4); opacity: 0.3; } }
+.ill-drop { animation: ill-drop 3.6s var(--ease) infinite; }
+@keyframes ill-drop { 0%, 10% { transform: translateY(-24px); opacity: 0; } 40%, 80% { transform: none; opacity: 1; } 100% { transform: none; opacity: 0; } }
+.ill-orbit { transform-origin: 80px 40px; animation: ill-orbit 12s linear infinite; }
+@keyframes ill-orbit { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .ill-grow, .ill-pop, .ill-drop, .ill-orbit { animation: none; }
+}
+
+/* Tools: brand-coloured marks, a highlight moves from one card to the next */
+.tool-card {
+  transition: transform 0.5s var(--ease);
+}
+.tool-logo {
+  transition: transform 0.5s var(--ease);
+}
+.tool-name {
+  color: var(--ink-2);
+  transition: color 0.5s var(--ease);
+}
+.tool-card[data-on] {
+  transform: translateY(-6px);
+}
+.tool-card[data-on] .tool-logo {
+  transform: scale(1.12);
+}
+.tool-card[data-on] .tool-name {
+  color: var(--ink);
+}
+@media (prefers-reduced-motion: reduce) {
+  .tool-card, .tool-logo, .tool-name { transition: none; }
+}
+
+/* Reveal system: hidden until the motion script brings them in (JS only) */
+.js main :is(h1, .t-title, .t-large):not(.sr-only),
+.js main p.t-body:not(.tile *),
+.js main p.t-headline:not(.tile *),
+.js main .btn:not(.tile *) {
+  opacity: 0;
+}
+.w {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+}
+
+/* Header: hidden at the top of the page, slides in out of a light blur once you scroll */
+.dock-wrap {
+  transition: transform 0.6s var(--ease), opacity 0.4s var(--ease), filter 0.5s var(--ease);
+}
+.dock-wrap[data-hidden]:not(:focus-within) {
+  transform: translateY(-24px);
+  opacity: 0;
+  filter: blur(8px);
+  transition: transform 0.4s var(--ease), opacity 0.3s var(--ease), filter 0.4s var(--ease);
+}
+.dock-wrap[data-hidden]:not(:focus-within) .dock {
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dock-wrap, .dock-wrap[data-hidden] { transition: opacity 0.3s linear; transform: none !important; filter: none !important; }
+}
+
+
+.ill-wave { animation: ill-wave 2.4s var(--ease) infinite; }
+@keyframes ill-wave { 0%, 100% { transform: translateY(6px); } 50% { transform: translateY(-6px); } }
+@media (prefers-reduced-motion: reduce) { .ill-wave { animation: none; } }
+
+/* Contact drawing: messages arrive in turn, the reply types then lands */
+.ct { opacity: 0; animation: ct 7s var(--ease) infinite; }
+.ct-2 { animation-delay: 0.5s; }
+.ct-3 { animation-name: ct-typing; animation-delay: 1.1s; }
+.ct-4 { animation-name: ct-reply; animation-delay: 1.1s; }
+@keyframes ct { 0% { opacity: 0; transform: translateY(8px); } 8%, 85% { opacity: 1; transform: none; } 95%, 100% { opacity: 0; } }
+@keyframes ct-typing { 0% { opacity: 0; } 6%, 26% { opacity: 1; } 30%, 100% { opacity: 0; } }
+@keyframes ct-reply { 0%, 28% { opacity: 0; transform: translateY(10px); } 36%, 74% { opacity: 1; transform: none; } 84%, 100% { opacity: 0; } }
+.ct-dot { animation: ct-dot 0.9s var(--ease) infinite; }
+@keyframes ct-dot { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@media (prefers-reduced-motion: reduce) {
+  .ct, .ct-dot { animation: none; opacity: 1; }
+  .ct-3 { opacity: 0; }
+}
+
+/* Company marks in one colour */
+.brand-logo svg {
+  width: auto;
+  height: 100%;
+  display: block;
+}
+.brand-mask {
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+/* What I owned drawings */
+.ill-hop-sm { animation: ill-hop-sm 6s var(--ease) infinite; }
+@keyframes ill-hop-sm {
+  0%, 20% { transform: translate(0, 0); }
+  25%, 45% { transform: translate(34px, 0); }
+  50%, 70% { transform: translate(34px, 38px); }
+  75%, 95% { transform: translate(0, 38px); }
+  100% { transform: translate(0, 0); }
+}
+.own-row { animation: own-row 4.8s var(--ease) infinite; }
+@keyframes own-row { 0%, 20% { transform: translateY(0); } 33%, 53% { transform: translateY(18px); } 66%, 86% { transform: translateY(36px); } 100% { transform: translateY(0); } }
+.own-toggle { animation: own-toggle 4.8s var(--ease) infinite; }
+@keyframes own-toggle { 0%, 20% { transform: translateY(-26px); } 33%, 53% { transform: translateY(0); } 66%, 86% { transform: translateY(26px); } 100% { transform: translateY(-26px); } }
+.own-card { animation: own-card 4s var(--ease) infinite; }
+@keyframes own-card { 0%, 20% { transform: none; } 45%, 70% { transform: translate(-12px, -6px) rotate(-6deg); } 100% { transform: none; } }
+.own-scroll { animation: own-scroll 5s var(--ease) infinite; }
+@keyframes own-scroll { 0%, 20% { transform: translateY(0); } 45%, 75% { transform: translateY(-10px); } 100% { transform: translateY(0); } }
+.own-spin { transform-box: fill-box; transform-origin: center; animation: own-spin 6s var(--ease) infinite; }
+@keyframes own-spin { 0%, 15% { transform: rotate(0); } 50%, 65% { transform: rotate(90deg) translateY(4px); } 100% { transform: rotate(180deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .ill-hop-sm, .own-row, .own-toggle, .own-card, .own-scroll, .own-spin { animation: none; }
+}
+
+/* Next case study card */
+.next-arrow {
+  transition: transform var(--t-hover) var(--ease), background-color var(--t-hover) var(--ease);
+}
+.next-card:hover .next-arrow {
+  transform: translateX(4px) scale(0.95);
+  background: color-mix(in srgb, var(--accent) 86%, #fff);
+}
+
+/* Experience rows: thin lines above, between and below, no card */
+.exp-list > li {
+  border-top: 1px solid var(--line);
+}
+.exp-list > li:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.exp-arrow {
+  transition: transform var(--t-hover) var(--ease), background-color var(--t-hover) var(--ease), color var(--t-hover) var(--ease);
+}
+.exp-card:hover .exp-arrow {
+  transform: translateX(4px) scale(0.95);
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Two card types only:
+   - white with a hairline border: things you can click
+   - light grey, no border: a group of related content */
+.card-line {
+  background: #fff;
+  border: 1px solid var(--line);
+}
+
+/* Stack: holographic panel. An iridescent edge turns slowly, with a soft glow behind it. */
+@property --holo-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+.holo {
+  --holo: conic-gradient(
+    from var(--holo-angle),
+    #ff9bd2, #c5a8ff, #8ec5ff, #8ff0d6, #fff0a0, #ffb59b, #ff9bd2
+  );
+  position: relative;
+  padding: 2px;
+  border-radius: 28px;
+  corner-shape: squircle;
+  background: var(--holo);
+  animation: holo-spin 4s linear infinite;
+  isolation: isolate;
+}
+.holo::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--holo);
+  filter: blur(28px);
+  opacity: 0.6;
+  animation: holo-spin 4s linear infinite;
+}
+.holo-inner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 26px;
+  corner-shape: squircle;
+  background: var(--base);
+}
+/* The halo also glows inside, along the edges, fading toward the middle */
+.holo-inner::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  pointer-events: none;
+  background: var(--holo);
+  filter: blur(26px);
+  opacity: 0.4;
+  -webkit-mask-image: radial-gradient(ellipse 75% 70% at center, transparent 45%, #000 100%);
+  mask-image: radial-gradient(ellipse 75% 70% at center, transparent 45%, #000 100%);
+}
+.holo-inner > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Section title in the same iridescent colours, moving with the edge */
+.holo-title {
+  display: inline-block;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  background: linear-gradient(90deg, #e86bb0, #9b7bff, #4f9dff, #2fc9a4, #e0b400, #ff8a6b, #e86bb0);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: holo-text 4s linear infinite;
+}
+@keyframes holo-text {
+  to { background-position: 300% 0; }
+}
+@keyframes holo-spin {
+  to { --holo-angle: 360deg; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .holo, .holo::before, .holo-title { animation: none; }
+}
+
+/* Never leave one word alone on the last line */
+h1, h2, h3, .t-large, .t-title, .t-headline {
+  text-wrap: balance;
+}
+p, li, dd {
+  text-wrap: pretty;
+}

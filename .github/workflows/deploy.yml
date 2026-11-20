@@ -23,11 +23,15 @@ jobs:
         with:
           node-version: 24
           cache: npm
+          cache-dependency-path: nicolasmilosevic-redesign/package-lock.json
+      # The live site is the Next.js redesign, exported as static HTML to out/
       - run: npm ci
+        working-directory: nicolasmilosevic-redesign
       - run: npm run build
+        working-directory: nicolasmilosevic-redesign
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: nicolasmilosevic-redesign/out
 
   deploy:
     needs: build

@@ -1,0 +1,814 @@
+{
+  "site": {
+    "name": "Nicolas Milosevic",
+    "ownerFirstName": "Nicolas",
+    "role": "Senior product designer",
+    "location": "Spain",
+    "contactEmail": null,
+    "linkedin": "https://linkedin.com/in/nicolasmilosevic",
+    "brand": {
+      "colors": {
+        "background": "#0a0a0a",
+        "text": "#ebebeb",
+        "accent": "#2623f9 (oklch .47 .29 268)"
+      },
+      "fonts": [
+        "Host Grotesk"
+      ],
+      "mood": [
+        "exact",
+        "calm",
+        "collaborative"
+      ]
+    },
+    "logo": "/assets/favicon.svg",
+    "ogImage": "/assets/share.png"
+  },
+  "home": {
+    "title": "Nicolas Milosevic, Senior product designer",
+    "description": "Nicolas Milosevic, senior product designer in Spain. I design product interfaces and the design systems behind them, and I stay with the team until they ship.",
+    "hero": {
+      "headline": "I design product interfaces and the design systems behind them, and I stay with the team until they ship.",
+      "role": "Senior product designer",
+      "location": "Spain",
+      "locationNote": "Working remotely with teams around the world",
+      "status": "Open to new projects"
+    },
+    "work": {
+      "title": "Work",
+      "subtitle": "Five products from 2017 to today"
+    },
+    "approach": {
+      "text": "Most projects come to me as a messy problem. I give it a structure, then turn that structure into something people can use, together with the founders, PMs and engineers who will live with the result.",
+      "cta": {
+        "label": "About me",
+        "href": "/about"
+      }
+    },
+    "stats": [
+      {
+        "value": "9",
+        "label": "years in product design"
+      },
+      {
+        "value": "2M+",
+        "label": "users reached"
+      },
+      {
+        "value": "50+",
+        "label": "features shipped"
+      },
+      {
+        "value": "5",
+        "label": "industries"
+      }
+    ],
+    "contact": {
+      "status": "Open to new projects",
+      "title": "Got a messy product problem? Tell me about it.",
+      "cta": {
+        "label": "Get in touch",
+        "href": "https://linkedin.com/in/nicolasmilosevic"
+      }
+    },
+    "footer": {
+      "copyright": "© 2026 Nicolas Milosevic",
+      "links": [
+        "Home",
+        "Work",
+        "About",
+        "Design system",
+        "LinkedIn"
+      ],
+      "location": "Spain"
+    }
+  },
+  "projects": [
+    {
+      "slug": "somfy",
+      "name": "Somfy",
+      "kind": "UX and design system",
+      "years": "2022 to today",
+      "current": true,
+      "color": "#fab900",
+      "summary": "I design the dashboards, the main flows and the design system that six product teams build with.",
+      "tagline": "One design language for Somfy’s B2B and B2C products.",
+      "facts": {
+        "Role": "Freelance senior product designer",
+        "Period": "Nov 2022 to today",
+        "Domain": "Smart home and building automation",
+        "Scope": "Design system, Product design, App design, Web design"
+      },
+      "intro": "Somfy makes smart home and building automation products used around the world. I’ve worked with them as a freelance product designer since November 2022, on both B2B and B2C, and we’re still adding features one after another.",
+      "owned": [
+        "Activity dashboard and order tracking",
+        "Product comparator and variant tables",
+        "Installer homepage",
+        "The design system and its component library"
+      ],
+      "team": "Six product teams work with the component library, across B2B and B2C.",
+      "outcomes": [
+        {
+          "value": "6",
+          "label": "product teams using the component library"
+        },
+        {
+          "value": "40%",
+          "label": "less time spent on handoff between design and development"
+        }
+      ],
+      "chapters": [
+        {
+          "title": "Dashboard and order tracking",
+          "body": [
+            "The first goal was to help professional clients read their business data and track their orders.",
+            "I redesigned the activity dashboard so yearly performance and order activity are visible at a glance. The new order tracking flow is easier to navigate for people who use it every day: they find things faster and need less help from support."
+          ]
+        },
+        {
+          "title": "Product comparator",
+          "body": [
+            "I designed a new way to compare products: you select several and see them side by side.",
+            "Installers now choose with more confidence, and the catalogue is easier to browse and understand."
+          ]
+        },
+        {
+          "title": "Installer homepage and product variants",
+          "body": [
+            "The new homepage has to be useful from the first click, so the main actions, quick tools and relevant data are laid out in a clear order.",
+            "I also reworked the product variant tables to simplify the technical data and make it easier to read. Both pages use the new design system and work across the full Somfy range."
+          ]
+        }
+      ],
+      "gallery": [
+        {
+          "src": "/media/somfy/01.webp",
+          "alt": "Somfy Pro dashboard showing yearly invoiced revenue as a line chart",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 0,
+          "kind": "desktop screen",
+          "ratio": "16:10"
+        },
+        {
+          "src": "/media/somfy/02.webp",
+          "alt": "Order detail page with status and the list of ordered items",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 0,
+          "kind": "desktop screen",
+          "ratio": "16:10"
+        },
+        {
+          "src": "/media/somfy/03.webp",
+          "alt": "Rolling shutter catalogue with filters and a comparison tray at the bottom",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 1,
+          "kind": "desktop screen",
+          "ratio": "16:10"
+        },
+        {
+          "src": "/media/somfy/04.webp",
+          "alt": "Three products compared side by side across technical measurements",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 1,
+          "kind": "desktop screen",
+          "ratio": "16:10"
+        },
+        {
+          "src": "/media/somfy/05.webp",
+          "alt": "Installer homepage with a personal welcome",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 2,
+          "kind": "desktop screen",
+          "ratio": "16:10"
+        },
+        {
+          "src": "/media/somfy/06.webp",
+          "alt": "Product page with a reference table of variants and a price panel",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 2,
+          "kind": "desktop screen",
+          "ratio": "16:10"
+        }
+      ]
+    },
+    {
+      "slug": "zestia",
+      "name": "Zestia",
+      "kind": "Real estate SaaS",
+      "years": "2023",
+      "current": false,
+      "color": "#002e35",
+      "summary": "I worked directly with the CEO and CTO and designed the whole MVP from scratch.",
+      "tagline": "An MVP for every step of buying a property.",
+      "facts": {
+        "Role": "Freelance senior product designer",
+        "Period": "2023, 6 months",
+        "Domain": "Real estate SaaS",
+        "Scope": "Design system, Product design, SaaS design, MVP design"
+      },
+      "intro": "Zestia puts the whole property buying journey in one place: search, financing and brokerage. We started from nothing, and six months later the product was ready for investor demos and pilot users.",
+      "owned": [
+        "Information architecture",
+        "Core user flows for brokers and buyers",
+        "Dashboards for each type of profile",
+        "The visual system"
+      ],
+      "team": "I worked directly with the CEO and the CTO, fully remote from Spain.",
+      "outcomes": [
+        {
+          "value": "6",
+          "label": "months from zero to a product ready for investor demos and pilot users"
+        },
+        {
+          "value": "80+",
+          "label": "screens designed"
+        }
+      ],
+      "chapters": [
+        {
+          "title": "Dashboards and analytics",
+          "body": [
+            "I designed two dashboard views: one for the activity of a single franchise, and one for several franchises at once.",
+            "Each view changes with the role of the person using it and shows the data that role needs. I kept the charts readable for every level of user."
+          ]
+        },
+        {
+          "title": "Core flows",
+          "body": [
+            "I designed the main flows of the MVP for property search, financing and document management, with as little friction as possible between brokers and buyers.",
+            "I mapped each journey end to end and paid close attention to the moments when one profile hands over to another. Buying a property is complicated, so the product had to feel approachable from day one."
+          ]
+        }
+      ],
+      "gallery": [
+        {
+          "src": "/media/zestia/01.webp",
+          "alt": "Zestia dashboard with commission projections, calendar and team activity",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 0,
+          "kind": "desktop screen",
+          "ratio": "16:10"
+        },
+        {
+          "src": "/media/zestia/02.webp",
+          "alt": "Global dashboard with brokerage status charts and revenue cards",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 0,
+          "kind": "desktop screen",
+          "ratio": "16:10"
+        },
+        {
+          "src": "/media/zestia/03.webp",
+          "alt": "Blurred overview of the flows with the note that more than 80 screens were designed",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 1,
+          "kind": "process artifact",
+          "ratio": "16:10"
+        }
+      ]
+    },
+    {
+      "slug": "vibe",
+      "name": "Vibe",
+      "kind": "Product redesign",
+      "years": "2022 to 2023",
+      "current": false,
+      "color": "#6366f1",
+      "summary": "I owned the core flows and built the design system the product needed to keep growing.",
+      "tagline": "Reworking the core of a fast-growing ad-tech platform.",
+      "facts": {
+        "Role": "Freelance senior product designer",
+        "Period": "Jan 2022 to Mar 2023",
+        "Domain": "Ad-tech",
+        "Scope": "Design system, Product design, SaaS design"
+      },
+      "intro": "Vibe is like Google Ads for TV: any marketer can plan, buy and air TV ads on major channels in a few minutes. There was already an MVP when I joined. My job was to rework the main flows and give the product a base it could grow on.",
+      "owned": [
+        "Campaign creation and tracking",
+        "Campaign views and analytics",
+        "User management, permissions and billing",
+        "The design system, documented in Storybook"
+      ],
+      "team": "A small team of about 10 people, split between Paris and the US. I worked fully remote from Spain.",
+      "outcomes": [
+        {
+          "value": "15",
+          "label": "months shipping new features in short sprints"
+        }
+      ],
+      "chapters": [
+        {
+          "title": "Campaign dashboard and creation flow",
+          "body": [
+            "I started with the whole campaign experience, from creation to tracking. We simplified the flow so people could build and manage campaigns faster and still stay in control.",
+            "The new dashboard shows active campaigns and their main metrics more clearly. I redesigned creation step by step, with simpler targeting, audience selection and scheduling."
+          ]
+        },
+        {
+          "title": "Campaign views and analytics",
+          "body": [
+            "Once creation was stable, we moved on to management views and analytics. People needed to check performance across several campaigns and act on it from the same place.",
+            "I designed table views with filters and custom sorting, and a new analytics dashboard built for comparing campaigns, so people can decide from the data."
+          ]
+        },
+        {
+          "title": "User management and permissions",
+          "body": [
+            "I also designed user management, team access and billing, so the product works for every kind of organisation, from independent agencies to large brands.",
+            "I documented every component and behaviour in Storybook, which kept handoff to the engineers clean and consistent."
+          ]
+        }
+      ],
+      "gallery": [
+        {
+          "src": "/media/vibe/03.webp",
+          "alt": "Vibe campaign analytics with impressions, spend and a performance line chart",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 1,
+          "kind": "desktop screen",
+          "ratio": "16:10"
+        },
+        {
+          "src": "/media/vibe/01.webp",
+          "alt": "Campaign creation step with strategy",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 0,
+          "kind": "desktop screen",
+          "ratio": "16:10"
+        },
+        {
+          "src": "/media/vibe/02.webp",
+          "alt": "Campaign creation step with audience",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 0,
+          "kind": "desktop screen",
+          "ratio": "16:10"
+        },
+        {
+          "src": "/media/vibe/04.webp",
+          "alt": "Table of channels with sortable performance columns",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 1,
+          "kind": "desktop screen",
+          "ratio": "16:10"
+        },
+        {
+          "src": "/media/vibe/05.webp",
+          "alt": "Settings page with a list of members and their roles",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 2,
+          "kind": "desktop screen",
+          "ratio": "16:10"
+        },
+        {
+          "src": "/media/vibe/06.webp",
+          "alt": "Settings page with a list of invoices",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 2,
+          "kind": "desktop screen",
+          "ratio": "16:10"
+        }
+      ]
+    },
+    {
+      "slug": "360learning",
+      "name": "360Learning",
+      "kind": "Platform redesign",
+      "years": "2018 to 2022",
+      "current": false,
+      "color": "#3c77f5",
+      "summary": "With my squad, I owned the enterprise suite, and I helped keep the shared design system in good shape.",
+      "tagline": "Faster, simpler course creation for more than 1,700 enterprise clients.",
+      "facts": {
+        "Role": "Product designer, Enterprise squad",
+        "Period": "Dec 2018 to Jan 2022",
+        "Domain": "Learning platform, EdTech",
+        "Scope": "Product design, Design system, Web design, SaaS design"
+      },
+      "intro": "360Learning is a collaborative learning platform that companies use to build and share knowledge internally. I spent more than three years there as a product designer in the Enterprise squad, where my main job was designing and growing the enterprise suite.",
+      "owned": [
+        "The enterprise suite",
+        "Learning Needs, from first request to course creation",
+        "Course structure and draft management",
+        "Maintaining the shared design system"
+      ],
+      "team": "My squad was one PM and two developers. Around us was a design team of eight, each person owning a different part of the product.",
+      "outcomes": [
+        {
+          "value": "30%",
+          "label": "less time to create a course"
+        },
+        {
+          "value": "1,700+",
+          "label": "enterprise clients on the platform"
+        }
+      ],
+      "chapters": [
+        {
+          "title": "Learning Needs",
+          "body": [
+            "This was the first feature I worked on. With Learning Needs, employees say what they want to learn and find colleagues who have the expertise.",
+            "When someone posts a need, others can upvote it, join the discussion or volunteer to create the course. We designed the whole experience, from collecting requests to finding contributors and running the collaboration, so that learning inside a company would be more social and easier to see."
+          ]
+        },
+        {
+          "title": "Course structure and draft management",
+          "body": [
+            "Once a need is approved, the team starts building the course. This step is about planning, organising and assigning the work before creation starts.",
+            "We designed a simple interface to manage drafts and set the structure. It shows who owns each step, so everyone knows before creation begins."
+          ]
+        },
+        {
+          "title": "Design system",
+          "body": [
+            "With eight designers each owning a different area, we needed a shared system to stay consistent. Regular syncs between squads helped us spot new patterns early, before they split into several versions.",
+            "The system grew from basic atoms to complex patterns like modals, forms and data tables. I worked closely with developers on handoff standards, usage guidelines and edge cases. Keeping it healthy meant reviewing new requests all the time so nothing got built twice."
+          ]
+        }
+      ],
+      "gallery": [
+        {
+          "src": "/media/360learning/01.webp",
+          "alt": "360Learning home screen with team members and a table of ongoing opportunities",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 0,
+          "kind": "desktop screen",
+          "ratio": "16:10"
+        },
+        {
+          "src": "/media/360learning/02.webp",
+          "alt": "Feed of learning needs with filters and apply buttons",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 0,
+          "kind": "desktop screen",
+          "ratio": "16:10"
+        },
+        {
+          "src": "/media/360learning/03.webp",
+          "alt": "Course planning page with description and modules",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 1,
+          "kind": "desktop screen",
+          "ratio": "16:10"
+        },
+        {
+          "src": "/media/360learning/04.webp",
+          "alt": "Project plan listing modules",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 1,
+          "kind": "desktop screen",
+          "ratio": "16:10"
+        },
+        {
+          "src": "/media/360learning/05.webp",
+          "alt": "Collection of components",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 2,
+          "kind": "process artifact",
+          "ratio": "16:10"
+        },
+        {
+          "src": "/media/360learning/06.webp",
+          "alt": "Collection of form controls",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 2,
+          "kind": "process artifact",
+          "ratio": "16:10"
+        }
+      ]
+    },
+    {
+      "slug": "axa",
+      "name": "AXA",
+      "kind": "Design system",
+      "years": "2017 to 2018",
+      "current": false,
+      "color": "#494df4",
+      "summary": "As a consultant, I designed new features and system components, and helped designers and developers work from the same language.",
+      "tagline": "One design language for AXA’s insurance and banking products.",
+      "facts": {
+        "Role": "Consulting product designer, through Monsieur Guiz",
+        "Period": "Aug 2017 to Nov 2018",
+        "Domain": "Insurance and banking",
+        "Scope": "Design system, Product design, App design, Illustration"
+      },
+      "intro": "AXA is one of the largest insurance and banking groups in the world, present in more than 50 countries. Through the agency Monsieur Guiz, I worked as a consulting product designer on both sides of the business, on new features, the design system and a product language the teams could share.",
+      "owned": [
+        "New features for the AXA Insurance website",
+        "The website presenting the new AXA Bank app",
+        "Components and documentation in the shared design system",
+        "A set of custom illustrations"
+      ],
+      "team": "I consulted through the agency Monsieur Guiz: six months with AXA Bank and six months with AXA Insurance, working close to the development teams.",
+      "outcomes": [],
+      "chapters": [
+        {
+          "title": "Insurance and bank websites",
+          "body": [
+            "At AXA Insurance, I designed new features for the website and improved the foundations of the design system: layouts, navigation and responsive guidelines that work across products and devices.",
+            "For AXA Bank, I designed the responsive layouts and visuals of a website presenting the new mobile app. The features had to be easy to understand, and the site had to stay true to the brand."
+          ]
+        },
+        {
+          "title": "Design system",
+          "body": [
+            "I contributed to the shared AXA Design System by building components and defining the spacing, constraints and documentation the development teams worked from.",
+            "Each component had to behave the same way across teams and contexts, and still leave room to adapt."
+          ]
+        },
+        {
+          "title": "Illustrations",
+          "body": [
+            "Alongside the product work, I drew a set of custom illustrations for the AXA Bank website and app.",
+            "They explain complicated financial topics in a friendlier way and make the product easier to approach for everyday users."
+          ]
+        }
+      ],
+      "gallery": [
+        {
+          "src": "/media/axa/01.webp",
+          "alt": "AXA insurance homepage with a family in front of their house and product shortcuts",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 0,
+          "kind": "desktop screen",
+          "ratio": "16:10"
+        },
+        {
+          "src": "/media/axa/02.webp",
+          "alt": "AXA Bank page presenting the mobile app on several tilted phones",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 0,
+          "kind": "desktop screen (existing 3D mockup)",
+          "ratio": "16:10"
+        },
+        {
+          "src": "/media/axa/03.webp",
+          "alt": "Angled view of design system components and form fields",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 1,
+          "kind": "process artifact",
+          "ratio": "16:10"
+        },
+        {
+          "src": "/media/axa/04.webp",
+          "alt": "Component specifications with spacing and constraint annotations",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 1,
+          "kind": "process artifact",
+          "ratio": "16:10"
+        },
+        {
+          "src": "/media/axa/05.webp",
+          "alt": "Colourful illustrated characters on a blue background",
+          "width": 2880,
+          "height": 1800,
+          "chapter": 2,
+          "kind": "illustration",
+          "ratio": "16:10"
+        }
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "slug": "about",
+      "title": "About",
+      "url": "https://nicolasmilosevic.com/about/",
+      "metaDescription": "Nicolas Milosevic, senior product designer based in Spain, with nine years in fast-moving teams across Europe.",
+      "heading": "Nine years of untangling products with the people who build them.",
+      "intro": [
+        "I’m Nicolas, a senior product designer based in Spain. For nine years I’ve worked with fast-moving teams across Europe, from early-stage startups to large companies.",
+        "Most of my work is making complicated products easier to use. Sometimes that’s a full platform redesign, sometimes a single feature or a design system. Whatever the size, I start with a clear structure, and then I take care of the details.",
+        "I’m comfortable leading design from start to finish, and just as happy being one voice in a good team. My best work came from working every day with people who saw the problem differently from me."
+      ],
+      "howIWork": {
+        "title": "How I work",
+        "items": [
+          {
+            "title": "I own the outcome",
+            "body": "When I take on a product area, it’s mine from end to end: the structure, the flows, the details and the questions nobody else has time for. I stay on it until it ships."
+          },
+          {
+            "title": "I design with the people who build",
+            "body": "I work closely with founders, product managers and engineers. Most good decisions come out of those conversations, so I bring people in early and show work before it’s finished."
+          },
+          {
+            "title": "I leave a system behind",
+            "body": "Every project on this site has a design system, because the team has to keep shipping after I leave. It lets them keep using our decisions when I’m not around."
+          },
+          {
+            "title": "I work remotely and stay close",
+            "body": "For years I’ve worked from Spain with teams in Paris, the US and elsewhere. Clear files, written decisions and being easy to reach keep the distance from getting in the way."
+          }
+        ]
+      },
+      "stats": [
+        {
+          "value": "9",
+          "label": "years in product design"
+        },
+        {
+          "value": "2M+",
+          "label": "users reached"
+        },
+        {
+          "value": "50+",
+          "label": "features shipped"
+        },
+        {
+          "value": "5",
+          "label": "industries"
+        }
+      ],
+      "experience": {
+        "title": "Experience",
+        "items": [
+          {
+            "company": "Somfy",
+            "role": "Freelance senior product designer",
+            "period": "Nov 2022 to today",
+            "href": "/work/somfy/"
+          },
+          {
+            "company": "Zestia",
+            "role": "Freelance senior product designer",
+            "period": "2023, 6 months",
+            "href": "/work/zestia/"
+          },
+          {
+            "company": "Vibe",
+            "role": "Freelance senior product designer",
+            "period": "Jan 2022 to Mar 2023",
+            "href": "/work/vibe/"
+          },
+          {
+            "company": "360Learning",
+            "role": "Product designer, Enterprise squad",
+            "period": "Dec 2018 to Jan 2022",
+            "href": "/work/360learning/"
+          },
+          {
+            "company": "AXA",
+            "role": "Consulting product designer, through Monsieur Guiz",
+            "period": "Aug 2017 to Nov 2018",
+            "href": "/work/axa/"
+          }
+        ]
+      },
+      "whatIDo": {
+        "title": "What I do",
+        "items": [
+          "Product design",
+          "Product strategy",
+          "Design systems",
+          "Prototyping in code",
+          "User research"
+        ]
+      },
+      "whatIUse": {
+        "title": "What I use",
+        "items": [
+          "Figma",
+          "Cursor",
+          "Codex",
+          "Claude",
+          "Framer",
+          "Notion",
+          "Affinity Studio",
+          "Krea",
+          "GitHub",
+          "Vercel"
+        ]
+      },
+      "contact": {
+        "status": "Open to new projects",
+        "title": "Got a messy product problem? Tell me about it.",
+        "cta": {
+          "label": "Get in touch",
+          "href": "https://linkedin.com/in/nicolasmilosevic"
+        }
+      }
+    },
+    {
+      "slug": "system",
+      "title": "Design system",
+      "url": "https://nicolasmilosevic.com/system/",
+      "metaDescription": "The tokens and components behind this site.",
+      "heading": "Design system",
+      "intro": "Everything on this site comes from one tokens file and a small set of components. This page reads the same file, so it can't go out of date.",
+      "sections": [
+        "Principles",
+        "Accent",
+        "Project colours",
+        "Greys",
+        "Semantic colours",
+        "Type",
+        "Grid",
+        "Space",
+        "Motion",
+        "Buttons",
+        "Components",
+        "Motion attributes"
+      ],
+      "note": "The original page documents the old site's tokens (black surface, Host Grotesk, 12-column grid). The redesign keeps its structure and project colours and documents the new tokens.",
+      "projectColours": [
+        {
+          "name": "Somfy",
+          "hex": "#fab900"
+        },
+        {
+          "name": "Zestia",
+          "hex": "#002e35"
+        },
+        {
+          "name": "Vibe",
+          "hex": "#6366f1"
+        },
+        {
+          "name": "360Learning",
+          "hex": "#3c77f5"
+        },
+        {
+          "name": "AXA",
+          "hex": "#494df4"
+        }
+      ],
+      "image": {
+        "src": "/media/axa/05.webp",
+        "alt": "Colourful illustrated characters on a blue background",
+        "width": 2880,
+        "height": 1800
+      }
+    }
+  ],
+  "person": {
+    "fullName": "Nicolas Milosevic",
+    "firstName": "Nicolas",
+    "role": "Senior product designer",
+    "position": "Freelance senior product designer",
+    "company": "Somfy",
+    "availability": "Open to new projects",
+    "location": "Spain, working remotely with teams around the world",
+    "bio": "Most projects come to me as a messy problem. I give it a structure, then turn that structure into something people can use, together with the founders, PMs and engineers who will live with the result.",
+    "email": null,
+    "linkedin": "https://linkedin.com/in/nicolasmilosevic",
+    "cv": null
+  },
+  "brandNotes": {
+    "accent": "#2623F9",
+    "fonts": [
+      "Host Grotesk"
+    ],
+    "mood": [
+      "exact",
+      "calm",
+      "collaborative"
+    ],
+    "productColors": {
+      "somfy": "#fab900",
+      "zestia": "#002e35",
+      "vibe": "#6366f1",
+      "360learning": "#3c77f5",
+      "axa": "#494df4"
+    }
+  },
+  "nav": [
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "About",
+      "href": "/about/"
+    },
+    {
+      "label": "Design system",
+      "href": "/system/"
+    }
+  ]
+}
