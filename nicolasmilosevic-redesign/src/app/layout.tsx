@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Dock from "@/components/Dock";
 import Motion from "@/components/Motion";
+import HoloFavicon from "@/components/HoloFavicon";
 import Footer from "@/components/Footer";
 import { home } from "@/lib/content";
 
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <Dock />
         <Motion />
+        <HoloFavicon />
       </body>
     </html>
   );
