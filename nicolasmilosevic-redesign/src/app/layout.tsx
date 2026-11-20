@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://nicolasmilosevic.com"),
   title: { default: home.title, template: "%s, Nicolas Milosevic" },
   description: home.description,
-  icons: { icon: "/assets/favicon.svg", apple: "/assets/apple-touch-icon.png" },
+  icons: { apple: "/assets/apple-touch-icon.png" },
   openGraph: { images: ["/assets/share.png"], title: home.title, description: home.description },
 };
 export const viewport: Viewport = { themeColor: "#fbfbfd" };
@@ -28,6 +28,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={manrope.variable} suppressHydrationWarning>
       <head>
+        {/* the only favicon link: HoloFavicon animates this same element */}
+        <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" data-holo="" />
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
       <body>
