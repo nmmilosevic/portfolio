@@ -1,12 +1,18 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Dock from "@/components/Dock";
 import Motion from "@/components/Motion";
 import Footer from "@/components/Footer";
 import { home } from "@/lib/content";
 
-const manrope = Manrope({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-manrope", display: "swap" });
+// Manrope (SIL Open Font License), bundled so the build never depends on downloading it
+const manrope = localFont({
+  src: "../fonts/Manrope-latin.woff2",
+  weight: "400 600",
+  variable: "--font-manrope",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://nicolasmilosevic.com"),
