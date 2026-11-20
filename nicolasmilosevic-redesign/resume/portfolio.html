@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Nicolas Milosevic - Senior Product Designer - Resume</title>
+<meta name="author" content="Nicolas Milosevic">
+<meta name="description" content="Senior Product Designer, 9+ years in B2B SaaS and smart home products. Design systems, UX research, end-to-end product design.">
+<meta name="keywords" content="Senior Product Designer, Product Design, UX Design, UI Design, Design Systems, User Research, Figma, B2B SaaS">
+<!--
+  Portfolio resume, the one linked from the About page.
+  Mirrors the Figma frame "Resume / 2026 · Portfolio, light"
+  (figma.com/design/6qK2s0qZCpxNcX5v7VsBoZ, node 739:433). Export: npm run resume
+  The ATS version lives in ats.html (npm run resume:ats).
+-->
+<style>
+  @font-face {
+    font-family: "Manrope";
+    src: url("../src/fonts/Manrope-latin.woff2") format("woff2");
+    font-weight: 200 800;
+    font-display: block;
+  }
+  :root {
+    --base: #fbfbfd;
+    --ink: #1d1d1f;
+    --ink-2: #86868b;
+    --hair: rgba(0, 0, 0, 0.08);
+    --accent: #2623f9;
+  }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    width: 210mm; height: 297mm; overflow: hidden;
+    background: var(--base);
+    padding: 30pt 40pt 32pt;
+    font-family: "Manrope", Arial, Helvetica, sans-serif;
+    color: var(--ink);
+    font-size: 8.5pt;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    font-variant-ligatures: none;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  h1, h2, h3, p, ul { margin: 0; }
+  a { color: inherit; text-decoration: none; }
+  p, li { text-wrap: pretty; }
+  .hair { border-top: 0.75pt solid var(--hair); }
+
+  /* Header */
+  header { display: flex; justify-content: space-between; align-items: flex-end; }
+  h1 { font-size: 30pt; line-height: 1.05; font-weight: 600; letter-spacing: -0.025em; }
+  .role { margin-top: 4pt; font-size: 12.5pt; line-height: 1.3; font-weight: 500; color: var(--accent); }
+  .contact { text-align: right; color: var(--ink-2); font-weight: 500; line-height: 1.45; }
+  .status { display: inline-flex; align-items: center; gap: 5pt; color: var(--ink); font-weight: 600; margin-bottom: 3pt; }
+  .dot { width: 5pt; height: 5pt; border-radius: 50%; background: var(--accent); display: inline-block; }
+
+  .summary { margin-top: 16pt; padding-top: 14pt; font-size: 10.5pt; line-height: 1.5; }
+
+  /* Body */
+  .body { margin-top: 16pt; display: grid; grid-template-columns: 340pt 1fr; gap: 28pt; }
+  h2 { font-size: 12pt; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em; }
+
+  .job { padding-top: 10pt; margin-top: 10pt; }
+  .job-top { display: flex; justify-content: space-between; align-items: center; }
+  .company { font-size: 10.5pt; line-height: 1.2; font-weight: 600; letter-spacing: -0.01em; }
+  .dates, .ctx { color: var(--ink-2); font-weight: 500; }
+  .title { margin-top: 5pt; }
+  .title b { font-size: 9.5pt; font-weight: 600; }
+  .title .ctx { margin-left: 4pt; }
+  ul.points { list-style: none; padding: 2pt 0 0; display: grid; gap: 2pt; margin-top: 3pt; }
+  ul.points li { position: relative; padding-left: 10.5pt; }
+  ul.points li::before {
+    content: ""; position: absolute; left: 0; top: 5pt;
+    width: 3.5pt; height: 3.5pt; border-radius: 50%; background: var(--accent);
+  }
+
+  aside > section + section { margin-top: 14pt; padding-top: 12pt; }
+  aside h2 { margin-bottom: 8pt; }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10pt 12pt; }
+  .stat b { display: block; font-size: 20pt; line-height: 1.1; font-weight: 600; letter-spacing: -0.02em; }
+  .stat span { display: block; margin-top: 1pt; font-size: 8pt; line-height: 1.3; color: var(--ink-2); font-weight: 500; }
+  .group + .group { margin-top: 8pt; }
+  .group h3 { font-size: 8.5pt; line-height: 1.4; font-weight: 600; color: var(--accent); }
+  .group p { line-height: 1.4; }
+
+  .tools { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; grid-auto-flow: column; grid-template-rows: repeat(5, auto); gap: 5pt 8pt; }
+  .tools li { display: flex; align-items: center; gap: 5pt; font-weight: 500; line-height: 1.4; }
+  .logo { width: 11pt; height: 11pt; flex: none; display: block; }
+  .mask { background: var(--c); -webkit-mask: var(--m) center / contain no-repeat; mask: var(--m) center / contain no-repeat; }
+
+  .edu b { font-weight: 600; }
+  .edu .dates { display: block; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Nicolas Milosevic</h1>
+    <p class="role">Senior Product Designer</p>
+  </div>
+  <div class="contact">
+    <span class="status"><span class="dot"></span>Open to new projects</span><br>
+    <a href="mailto:nm.milosevic@gmail.com">nm.milosevic@gmail.com</a><br>
+    <a href="https://linkedin.com/in/nicolasmilosevic">linkedin.com/in/nicolasmilosevic</a><br>
+    <a href="https://nicolasmilosevic.com">nicolasmilosevic.com</a><br>
+    Remote, Spain
+  </div>
+</header>
+
+<p class="summary hair">Senior product designer with 9+ years on B2B SaaS and smart home products. I build and scale design systems, simplify complex workflows, and take features from research to release, working every day with product managers and engineers until the work ships.</p>
+
+<div class="body">
+  <main>
+    <h2>Experience</h2>
+
+    <section class="job hair">
+      <div class="job-top"><h3 class="company">Freelance</h3><span class="dates">Jan 2022 – Present</span></div>
+      <p class="title"><b>Senior Product Designer</b><span class="ctx">· Startups, scale-ups and agencies</span></p>
+      <ul class="points">
+        <li>Embedded design partner for startups and scale-ups, raising UX quality across mobile and web.</li>
+        <li>Restructured fragmented design systems with component libraries and tokens, cutting handoff time by 40%.</li>
+        <li>Led UX audits that simplified complex workflows and raised task completion.</li>
+      </ul>
+    </section>
+
+    <section class="job hair">
+      <div class="job-top"><h3 class="company">Somfy</h3><span class="dates">Apr 2023 – Present</span></div>
+      <p class="title"><b>Senior Product Designer, freelance</b><span class="ctx">· Smart home, B2B and B2C</span></p>
+      <ul class="points">
+        <li>Designed and shipped smart home features on iOS, Android and web, improving engagement and adoption.</li>
+        <li>Scaled the design system to new platforms across 20+ product features.</li>
+        <li>Ran user research and usability tests with Product and Engineering.</li>
+      </ul>
+    </section>
+
+    <section class="job hair">
+      <div class="job-top"><h3 class="company">Vibe</h3><span class="dates">Jan 2022 – Mar 2023</span></div>
+      <p class="title"><b>Senior Product Designer, freelance</b><span class="ctx">· CTV and OTT ad platform</span></p>
+      <ul class="points">
+        <li>Redesigned campaign creation and management flows to cut complexity in multi-step setup.</li>
+        <li>Simplified dashboard architecture and scaled the design system for faster iteration.</li>
+      </ul>
+    </section>
+
+    <section class="job hair">
+      <div class="job-top"><h3 class="company">360Learning</h3><span class="dates">Dec 2018 – Jan 2022</span></div>
+      <p class="title"><b>Product Designer</b><span class="ctx">· Learning SaaS, enterprise squad</span></p>
+      <ul class="points">
+        <li>Built the design system from scratch and scaled it to 5+ product squads and more than 50 shipped features.</li>
+        <li>Designed end-to-end features for enterprise clients, from discovery to delivery.</li>
+        <li>Ran user interviews and usability studies to inform and validate features.</li>
+      </ul>
+    </section>
+
+    <section class="job hair">
+      <div class="job-top"><h3 class="company">Monsieur Guiz</h3><span class="dates">Aug 2017 – Nov 2018</span></div>
+      <p class="title"><b>UX/UI Designer</b><span class="ctx">· Digital agency, AXA client work</span></p>
+      <ul class="points">
+        <li>AXA Banque: mobile banking UI, landing pages and campaign assets.</li>
+        <li>AXA.fr: responsive web features and contributions to the enterprise design system.</li>
+      </ul>
+    </section>
+  </main>
+
+  <aside>
+    <section>
+      <h2>In numbers</h2>
+      <div class="stats">
+        <p class="stat"><b>9</b><span>years in design</span></p>
+        <p class="stat"><b>2M+</b><span>users reached</span></p>
+        <p class="stat"><b>50+</b><span>features shipped</span></p>
+        <p class="stat"><b>5</b><span>industries</span></p>
+      </div>
+    </section>
+
+    <section class="hair">
+      <h2>Skills</h2>
+      <div class="group"><h3>Product design</h3><p>UX and UI design, design systems and tokens, prototyping in Figma and code, user flows, WCAG accessibility</p></div>
+      <div class="group"><h3>Research</h3><p>User interviews, usability testing, A/B testing, heuristic analysis</p></div>
+      <div class="group"><h3>Ways of working</h3><p>Cross-functional teams, Agile / Scrum, design leadership, mentoring</p></div>
+    </section>
+
+    <section class="hair">
+      <h2>Tools</h2>
+      <ul class="tools">
+        <li><svg class="logo" viewBox="-9.5 0 57 57" aria-hidden="true"><path fill="#F24E1E" d="M18.5 0H9.25a9.25 9.25 0 0 0 0 18.5h9.25z"/><path fill="#FF7262" d="M19.5 0h9.25a9.25 9.25 0 0 1 0 18.5H19.5z"/><path fill="#A259FF" d="M18.5 19.5H9a9 9 0 0 0 0 18h9.5z"/><circle fill="#1ABCFE" cx="29" cy="28.5" r="9"/><path fill="#0ACF83" d="M18.5 38.5H9.25a9.25 9.25 0 1 0 9.25 9.25z"/></svg>Figma</li>
+        <li><i class="logo mask" style="--c:#000;--m:url(../src/assets/logos/cursor.svg)"></i>Cursor</li>
+        <li><i class="logo mask" style="--c:#000;--m:url(../src/assets/logos/codex.svg)"></i>Codex</li>
+        <li><i class="logo mask" style="--c:#D97757;--m:url(../src/assets/logos/claude.svg)"></i>Claude</li>
+        <li><i class="logo mask" style="--c:#0055FF;--m:url(../src/assets/logos/framer.svg)"></i>Framer</li>
+        <li><i class="logo mask" style="--c:#000;--m:url(../src/assets/logos/notion.svg)"></i>Notion</li>
+        <li><i class="logo mask" style="--c:#222324;--m:url(../src/assets/logos/affinity-studio.svg)"></i>Affinity</li>
+        <li><i class="logo mask" style="--c:#000;--m:url(../public/assets/brands/krea.png)"></i>Krea</li>
+        <li><i class="logo mask" style="--c:#181717;--m:url(../src/assets/logos/github.svg)"></i>GitHub</li>
+        <li><i class="logo mask" style="--c:#000;--m:url(../src/assets/logos/vercel.svg)"></i>Vercel</li>
+      </ul>
+    </section>
+
+    <section class="hair edu">
+      <h2>Education</h2>
+      <p><b>UX/UI Design Program</b><br>Epitec Digital School, Paris<span class="dates">2013 – 2016</span></p>
+      <div class="group" style="margin-top:8pt"><h3>Languages</h3><p>English and French, both fluent</p></div>
+    </section>
+  </aside>
+</div>
+
+</body>
+</html>
