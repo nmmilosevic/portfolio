@@ -52,10 +52,25 @@ export default function Motion() {
     // Count pages seen in this visit, so a back button knows it can use history
     const w = window as unknown as { __pagesSeen?: number };
     w.__pagesSeen = (w.__pagesSeen ?? 0) + 1;
+    // The smooth scroll keeps its own target: reset it too, or it glides back to the old position
+    const lenis = (window as unknown as { __lenis?: Lenis }).__lenis;
     if (!fromHistory) {
-      const target = window.location.hash ? document.querySelector(window.location.hash) : null;
-      if (target) requestAnimationFrame(() => target.scrollIntoView());
-      else window.scrollTo(0, 0);
+      const target = window.location.hash ? document.querySelector<HTMLElement>(window.location.hash) : null;
+      if (target) {
+        requestAnimationFrame(() => {
+          if (lenis) lenis.scrollTo(target, { immediate: true, force: true });
+          else target.scrollIntoView();
+        });
+      } else {
+        window.scrollTo(0, 0);
+        lenis?.scrollTo(0, { immediate: true, force: true });
+      }
+    } else if (lenis) {
+      // back / forward: the browser restores the position, the smooth scroll follows it
+      requestAnimationFrame(() => {
+        lenis.resize();
+        lenis.scrollTo(window.scrollY, { immediate: true, force: true });
+      });
     }
     fromHistory = false;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
